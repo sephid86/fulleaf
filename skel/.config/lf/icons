@@ -1,0 +1,120 @@
+# https://github.com/karabaja4/arch/blob/master/lf/icons.sh
+# https://bbs.archlinux.org/viewtopic.php?id=275167
+
+# vim:ft=conf
+
+# These examples require Nerd Fonts or a compatible font to be used.
+# See https://www.nerdfonts.com for more information.
+
+# default values from lf (with matching order)
+# ln      l       # LINK
+# or      l       # ORPHAN
+# tw      t       # STICKY_OTHER_WRITABLE
+# ow      d       # OTHER_WRITABLE
+# st      t       # STICKY
+# di      d       # DIR
+# pi      p       # FIFO
+# so      s       # SOCK
+# bd      b       # BLK
+# cd      c       # CHR
+# su      u       # SETUID
+# sg      g       # SETGID
+# ex      x       # EXEC
+# fi      -       # FILE
+
+ln 🔗
+or 💔
+tw 📁
+ow 📁
+st 📁
+di 📁
+pi ⏩
+so 🔌
+bd 🔌
+cd 📌
+su 📜
+sg 📜
+ex 📜
+fi 📄
+*.txt 📝
+*.log 📄
+*.avi 📺
+*.mkv 📺
+*.mp4 📺
+*.mov 📺
+*.srt 💬
+*.mp3 🎶
+*.aac 🎶
+*.m4a 🎶
+*.flac 🎶
+*.ogg 🎶
+*.wav 🎵
+*.png 🌄
+*.jpg 🌄
+*.bmp 🌄
+*.gif 🌄
+*.tga 🌄
+*.jpeg 🌄
+*.svg 🌄
+*.ico 🌄
+*.webp 🌄
+*.pdf 📘
+*.md 📘
+*.c 📜
+*.cpp 📜
+*.h 📜
+*.sh 📜
+*.js 📜
+*.py 📜
+*.cs 📜
+*.css 📜
+*.php 📜
+*.json 📜
+*.xml 📜
+*.yml 📜
+*.yaml 📜
+*.install 📜
+*.scm 🔧
+*.pid 🔧
+*.conf 🔧
+*.cfg 🔧
+*.cnf 🔧
+*.ini 🔧
+*.exe 🍷
+*.so 📚
+*.dll 📚
+*.gz 📦
+*.zip 📦
+*.rar 📦
+*.7z 📦
+*.bz2 📦
+*.xz 📦
+*.zst 📦
+*.deb 📦
+*.apk 📦
+*.iso 💿
+*.img 💿
+*.htm 🌍
+*.html 🌍
+*.torrent 🌐
+*.pub 🔒
+*.key 🔑
+*.crt 🔑
+*.pem 🔑
+*.gpg 🔑
+*.vbox 💻
+*.vdi 💽
+*.ova 📦
+*.xls 📊
+*.xlsx 📊
+*.doc 📋
+*.docx 📋
+*.ppt 🌠
+*.pptx 🌠
+#/home/igor 🏡
+#/home/igor/_disk 💿
+#/home/igor/_mmc 💿
+#/home/igor/_private 🌍
+#/home/igor/_public 🌍
+#/home/igor/_shared 🌐
+

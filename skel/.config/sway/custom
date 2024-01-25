@@ -1,0 +1,149 @@
+##---기본 설정.
+font pango:Noto Sans CJK KR Regular 11
+focus_follows_mouse no
+default_border pixel 2
+titlebar_border_thickness 2
+gaps inner 8
+
+#- 디스플레이 설정
+#set $dp1 DVI-I-1
+#set $dp1 DP-1
+#set $dp2 HDMI-A-1
+
+#기본 디스플레이의 position 은 반드시 0,0 이어야 합니다.
+#output $dp1 {
+#  position 0,0
+#}
+
+#output $dp2 {
+#  resolution 1920x1080
+#    position -1920,0
+#    position 0,0
+#}
+
+#workspace 1 output $dp1 
+#focus output $dp1
+
+#output $dp2 disable
+
+#- 외부디스플레이 토글키
+bindsym $mod+Ctrl+grave output $dp2 toggle
+
+##--- 윈도우 테두리 컬러 설정.
+set $focus_border_color "#ffffff"
+set $focus_bg_color "#555555"
+set $focus_font_color "#00ff00"
+set $focus_indicator_color $focus_border_color
+set $focus_child_color $focus_border_color
+
+set $unfocus_border_color "#555555"
+set $unfocus_bg_color "#333333"
+set $unfocus_font_color "#aaaaaa"
+set $unfocus_indicator_color $unfocus_border_color
+set $unfocus_child_color $unfocus_border_color
+
+set $inactiv_border_color $unfocus_border_color
+set $inactiv_bg_color $unfocus_bg_color
+set $inactive_font_color $unfocus_font_color
+
+set $tab_border_color $focus_border_color
+set $tab_bg_color $focus_bg_color
+set $tab_font_color $focus_font_color
+
+client.focused $focus_border_color $focus_bg_color $focus_font_color $focus_indicator_color $focus_child_color
+client.unfocused $unfocus_border_color $unfocus_bg_color $unfocus_font_color $unfocus_indicator_color $unfocus_child_color
+client.focused_inactive $inactiv_border_color $inactiv_bg_color $inactive_font_color
+client.focused_tab_title $tab_border_color $tab_bg_color $tab_font_color
+
+##--- 오른쪽Alt 한글키, 오른쪽Ctrl 한자키 설정.
+input * xkb_options korean:ralt_hangul,korean:rctrl_hanja
+
+##--- 단축키 설정.
+#- 음악재생 단축키
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioPlay exec mpc toggle
+#bindsym XF86AudioPause exec mpc pause
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+
+#-스크린샷 단축키
+bindsym Print exec slurp | grim -g - ~/$(date +'ss%y-%m-%d-%H%M%S.png')
+bindsym Shift+Print exec grim ~/$(date +'ss%y-%m-%d-%H%M%S.png')
+
+#- 창을 항상위에 토글 단축키(창을 PIP 로 만듭니다)
+bindsym $mod+Shift+s sticky toggle
+
+#- 알림창 단축키
+bindsym $mod+Shift+n exec swaync-client -t -sw
+
+##--- 시작프로그램 설정.
+exec "kime -k;sleep 1;kime"
+#exec "ibus-daemon -drR"
+#exec "ibus engine hangul"
+#exec --no-startup-id '/usr/bin/gnome-keyring-daemon --foreground --components="pkcs11,secrets,ssh" --control-directory=%t/keyring'
+exec "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+exec "easyeffects --gapplication-service"
+exec swaync
+#exec mako
+
+#- 화면잠금 및 절전모드 설정.
+exec swayidle -w \
+       timeout 1200 'swaylock -f -c 000000 -i ~/wallpaper/wallpaper1.jpg' \
+       timeout 1500 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+       timeout 2400 'systemctl suspend' \
+       before-sleep 'swaylock -f -c 000000 -i ~/wallpaper/wallpaper1.jpg'
+
+##---윈도우 설정
+#- 타일링 제외
+## swaymsg -t get_tree 명령어로 app_id 를 알아낼수 있습니다.
+#for_window [title="kime-candidate"] floating enable
+#for_window [app_id="thunar"] floating enable
+#for_window [app_id="mousepad"] floating enable
+#for_window [app_id="ristretto"] floating enable
+#for_window [app_id="swayimg"] floating enable
+#for_window [app_id="imv"] floating enable
+#for_window [app_id="pavucontrol"] floating enable
+#for_window [app_id="com.obsproject.Studio"] floating enable
+#for_window [app_id="easyeffects"] floating enable
+#for_window [app_id="rhythmbox"] floating enable
+#for_window [app_id="mpv"] floating enable
+#for_window [class="smplayer"] floating enable
+#for_window [class="kakaotalk.exe"] floating enable
+#for_window [class="Steam"] floating enable
+#for_window [class="steam*"] floating enable
+#for_window [class="jetbrains-studio"] floating enable
+#for_window [app_id="file-roller"] floating enable
+
+#- 모든 창을 스태킹으로 열도록 설정.
+for_window [shell=".*"] floating enable
+for_window [window_role=".*"] floating enable
+#for_window [app_id=".*"] floating enable
+#for_window [class=".*"] floating enable
+#for_window [instance=".*"] floating enable
+#for_window [title=".*"] floating enable
+
+#- 다이얼로그나 팝업창을 스태킹으로 열도록 설정.
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+#for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable;
+#for_window [title="(?:Open|Save) (?:File|Folder|As)"] resize set 800 600
+
+#- 스태킹 제외.
+for_window [app_id="foot"] floating disable
+for_window [app_id="libreoffice-calc"] floating disable
+for_window [title="Mozilla Firefox"] floating disable
+for_window [class="firefox" instance="Navigator"] floating disable
+
+#- 영상재생중 절전모드 또는 스크린세이버 중지.
+for_window [app_id="firefox"] inhibit_idle fullscreen
+for_window [class="firefox"] inhibit_idle fullscreen
+for_window [app_id="google-chrome"] inhibit_idle fullscreen
+for_window [class="Google-chrome"] inhibit_idle fullscreen
+#for_window [app_id="mpv"] inhibit_idle visible
+
+##--- 기타 메모
+#아래와 같이 실행하면 foot 터미널의 app_id 를 ncmpcpp 로 실행함.
+#exec "foot -a ncmpcpp ncmpcpp"
+

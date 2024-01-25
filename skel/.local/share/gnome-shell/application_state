@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<application-state>
+  <context id="">
+    <application id="android-studio.desktop" score="755.5" last-seen="1681854584"/>
+    <application id="org.gnome.TextEditor.desktop" score="3" last-seen="1681861994"/>
+    <application id="org.gnome.Cheese.desktop" score="0" last-seen="1681871226"/>
+    <application id="aqemu.desktop" score="2" last-seen="1681856168"/>
+    <application id="xdg-desktop-portal-gnome.desktop" score="2.375" last-seen="1681924977"/>
+    <application id="smplayer.desktop" score="238.625" last-seen="1682083657"/>
+    <application id="org.gnome.Weather.desktop" score="1.5" last-seen="1682000982"/>
+    <application id="firefox.desktop" score="17921" last-seen="1682133906"/>
+    <application id="org.gnome.tweaks.desktop" score="30.25" last-seen="1682050251"/>
+    <application id="libreoffice-startcenter.desktop" score="0" last-seen="1681779857"/>
+    <application id="vlc.desktop" score="0.5" last-seen="1681763216"/>
+    <application id="org.gnome.eog.desktop" score="23" last-seen="1681990776"/>
+    <application id="discord.desktop" score="2901.40625" last-seen="1682129334"/>
+    <application id="org.gnome.Terminal.Preferences.desktop" score="11.875" last-seen="1681864233"/>
+    <application id="org.gnome.Rhythmbox3.desktop" score="10.5" last-seen="1681758319"/>
+    <application id="org.gnome.Geary.desktop" score="13" last-seen="1681875073"/>
+    <application id="ca.desrt.dconf-editor.desktop" score="0" last-seen="1681754065"/>
+    <application id="io.elementary.terminal.desktop" score="6" last-seen="1681862781"/>
+    <application id="bssh.desktop" score="0" last-seen="1681871235"/>
+    <application id="org.gnome.Settings.desktop" score="77.9375" last-seen="1682051340"/>
+    <application id="xfce4-terminal.desktop" score="89.875" last-seen="1682133609"/>
+    <application id="org.gnome.Extensions.desktop" score="41.875" last-seen="1682133909"/>
+    <application id="libreoffice-writer.desktop" score="14.5" last-seen="1681593462"/>
+    <application id="org.gnome.Terminal.desktop" score="5228.125" last-seen="1682133873"/>
+    <application id="org.gnome.Shell.Extensions.desktop" score="1.875" last-seen="1681608623"/>
+    <application id="org.gnome.Calendar.desktop" score="2" last-seen="1681875169"/>
+    <application id="org.gnome.Boxes.desktop" score="1757" last-seen="1682133903"/>
+    <application id="com.obsproject.Studio.desktop" score="61.875" last-seen="1681991350"/>
+    <application id="gnome-system-monitor.desktop" score="7.875" last-seen="1681854557"/>
+    <application id="pavucontrol.desktop" score="59.6875" last-seen="1681990632"/>
+    <application id="org.gnome.FileRoller.desktop" score="0" last-seen="1681606912"/>
+    <application id="org.gnome.Totem.desktop" score="1" last-seen="1681605527"/>
+    <application id="wine-카카오톡.desktop" score="1.75" last-seen="1681604263"/>
+    <application id="libreoffice-calc.desktop" score="2.375" last-seen="1681779855"/>
+    <application id="org.gnome.clocks.desktop" score="0" last-seen="1681871245"/>
+    <application id="org.gnome.Nautilus.desktop" score="200.8125" last-seen="1682133909"/>
+    <application id="com.github.wwmm.easyeffects.desktop" score="124.25" last-seen="1681991349"/>
+    <application id="org.gnome.gedit.desktop" score="922.25" last-seen="1682051234"/>
+    <application id="mpv.desktop" score="32.5" last-seen="1681608155"/>
+  </context>
+</application-state>
