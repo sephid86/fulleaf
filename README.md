@@ -9,9 +9,9 @@
 https://drive.google.com/file/d/1eycF5A_RiqCAJv4dA9Wv0oRRHRog7-9H/view?usp=drive_link
 
 
-설치 옵션에서 스웨이(Sway) 설치 하는경우 .bashrc 에 
-alias vi='nvim'
-alias sudo='sudo '
+설치 옵션에서 스웨이(Sway) 설치 하는경우 .bashrc 에 <br>
+alias vi='nvim'<br>
+alias sudo='sudo '<br>
 추가해 줘야 합니다.
 
 수정하는걸 깜빡했어요... 다음 버전에서 수정하겠습니다.
