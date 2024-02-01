@@ -8,10 +8,6 @@
 --
 https://drive.google.com/file/d/1t4NCmIA0jRldBdLeCMnNcBpzca-cj2vB/view?usp=drive_link
 <br>
-<br>
-ranger 이용시 chmod +x /home/%s/.config/ranger/scope.sh 해줘야 합니다.<br>
-깜빡잊고 빠트렸습니다. 다음 버전 업데이트에 수정하겠습니다.<br>
-<br>
 
 -
 스웨이(Sway) 에서는 한글입력기를 직접 설치 하셔야 합니다.<br>
@@ -22,6 +18,10 @@ ranger 이용시 chmod +x /home/%s/.config/ranger/scope.sh 해줘야 합니다.<
 숙련자일 확률이 많으므로 기본 입력기가 거슬릴수 있는점.<br>
 -
 ranger 를 이용하실분은 aur 의 ranger-git 을 설치해야 정상 작동 합니다.<br>
+<br>
+ranger 이용시 chmod +x /home/%s/.config/ranger/scope.sh 해줘야 합니다.<br>
+깜빡잊고 빠트렸습니다. 다음 버전 업데이트에 수정하겠습니다.<br>
+<br>
 
 풀잎 리눅스를 가상머신에 설치하는 경우 
 -
