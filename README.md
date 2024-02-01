@@ -30,5 +30,5 @@ ranger 이용시
 https://github.com/ranger/ranger/issues/2864<br>
 
 2. ranger 이용시 chmod +x /home/사용자ID/.config/ranger/scope.sh 해줘야 합니다.<br>
-깜빡잊고 빠트렸습니다. 다음 버전 업데이트에 수정하겠습니다.<br>
+깜빡잊고 빠트렸습니다. 다음 업데이트에 수정하겠습니다.<br>
 <br>
