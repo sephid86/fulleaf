@@ -7,7 +7,11 @@
 풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.
 --
 https://drive.google.com/file/d/1t4NCmIA0jRldBdLeCMnNcBpzca-cj2vB/view?usp=drive_link
-
+-
+<br>
+ranger 이용시 chmod +x /home/%s/.config/ranger/scope.sh 해줘야 합니다.
+깜빡잊고 빠트렸습니다. 다음 버전 업데이트에 수정하겠습니다.
+<br>
 
 -
 스웨이(Sway) 에서는 한글입력기를 직접 설치 하셔야 합니다.<br>
