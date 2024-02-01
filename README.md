@@ -25,3 +25,13 @@ alias sudo='sudo '<br>
 숙련자일 확률이 많으므로 기본 입력기가 거슬릴수 있는점.
 -
 ranger 를 이용하실분은 aur 의 ranger-git 을 설치해야 정상 작동 합니다.
+-
+풀잎 리눅스를 가상머신에 설치하는 경우 
+-
+1. 가상머신을 efi 로 설정 해줘야 합니다.
+
+2. 가상머신에서 sway 를 정상적으로 사용하는 방법은 구글 검색 바랍니다.
+
+3. ranger 에서 rename 버그는 아래 링크를 확인해주시기 바랍니다.
+
+https://github.com/ranger/ranger/issues/2864 
