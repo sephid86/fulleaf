@@ -8,12 +8,6 @@
 --
 https://drive.google.com/file/d/1t4NCmIA0jRldBdLeCMnNcBpzca-cj2vB/view?usp=drive_link
 
-스웨이(Sway) 를 설치 하는경우 .bashrc 에 <br>
-alias vi='nvim'<br>
-alias sudo='sudo '<br>
-추가해 줘야 합니다.
-
-수정하는걸 깜빡했어요... 다음 버전에서 수정하겠습니다.
 
 -
 스웨이(Sway) 에서는 한글입력기를 직접 설치 하셔야 합니다.<br>
