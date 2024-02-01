@@ -6,8 +6,7 @@
 
 풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.
 --
-https://drive.google.com/file/d/1eycF5A_RiqCAJv4dA9Wv0oRRHRog7-9H/view?usp=drive_link
-
+https://drive.google.com/file/d/1t4NCmIA0jRldBdLeCMnNcBpzca-cj2vB/view?usp=drive_link
 
 스웨이(Sway) 를 설치 하는경우 .bashrc 에 <br>
 alias vi='nvim'<br>
