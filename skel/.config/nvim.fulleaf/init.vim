@@ -34,7 +34,7 @@ lua require('catppuccin').setup({transparent_background=true})
 
 "-----기본설정
 colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-set mouse=
+"set mouse=
 set clipboard=unnamedplus
 set tabstop=2
 set shiftwidth=2

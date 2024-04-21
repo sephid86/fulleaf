@@ -1,6 +1,10 @@
 #
 # ~/.bashrc
 #
+
+alias vi='nvim'
+alias sudo='sudo '
+
 export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 export EDITOR='nvim'
 

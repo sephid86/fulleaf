@@ -1,0 +1,14 @@
+import = [
+"~/.config/alacritty/monokai-sephid86.toml"
+#"~/.config/alacritty/midnight-haze.toml"
+]
+
+[font]
+size = 12
+
+[font.normal]
+family = "D2Coding"
+
+[window]
+opacity = 0.7
+
