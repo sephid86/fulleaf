@@ -30,7 +30,9 @@ set preview_images_method sixel
 크로미움 파이어폭스 한글입력
 -
 이슈 #4 참고 바랍니다.
+https://github.com/sephid86/fulleaf/issues/4
 
 sway 동영상 재생중 절전모드
 -
 이슈 #3 참고 바랍니다.
+https://github.com/sephid86/fulleaf/issues/3
