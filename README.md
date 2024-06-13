@@ -12,20 +12,12 @@
 --
 https://drive.google.com/file/d/1OH5wYBH6tEeJzI2UUjvILuaMHZVchkcw/view?usp=drive_link
 <br>
+<br>
+<br>
 
 풀잎 리눅스를 가상머신에 설치하는 경우 
 -
 1. 가상머신을 efi 로 설정 해줘야 합니다.<br>
-
-ranger 이미지 미리보기
--
-foot 터미널 기준입니다.
-
-1. aur 에서 ranger-git 설치해줍니다.
-
-2. ~/.config/ranger/rc.conf 파일에서
-아래 내용 주석 풀어줍니다.
-set preview_images_method sixel
 
 크로미움 또는 파이어폭스 한글입력
 -
@@ -38,3 +30,13 @@ sway 동영상 재생중 절전모드
 이슈
 https://github.com/sephid86/fulleaf/issues/3
 참고 바랍니다.
+
+ranger 이미지 미리보기
+-
+foot 터미널 기준입니다.
+
+1. aur 에서 ranger-git 설치해줍니다.
+
+2. ~/.config/ranger/rc.conf 파일에서
+아래 내용 주석 풀어줍니다.
+set preview_images_method sixel
