@@ -28,12 +28,14 @@ https://drive.google.com/file/d/1OH5wYBH6tEeJzI2UUjvILuaMHZVchkcw/view?usp=drive
 https://github.com/sephid86/fulleaf/issues/4
 참고 바랍니다.
 <br>
+<br>
 
 sway 동영상 재생중 절전모드
 -
 이슈
 https://github.com/sephid86/fulleaf/issues/3
 참고 바랍니다.
+<br>
 <br>
 
 ranger 이미지 미리보기
@@ -45,4 +47,5 @@ foot 터미널 기준입니다.
 2. ~/.config/ranger/rc.conf 파일에서
 아래 내용 주석 풀어줍니다. <br>
 set preview_images_method sixel
+<br>
 <br>
