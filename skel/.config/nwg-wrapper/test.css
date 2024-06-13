@@ -1,0 +1,19 @@
+window {
+  background-color: rgba (0, 0, 0, 0.0);
+  font-family: D2Coding;
+  font-size: 12pt;
+}
+
+#box-outer {
+  /* Define attributes of the box surrounding icons here */
+  background-color: rgba (0, 0, 0, 0.0)
+}
+
+#box-inner {
+  background-color: rgba (0, 0, 0, 0.25);
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba (0, 0, 0, 0.0);
+  padding: 14px
+}
