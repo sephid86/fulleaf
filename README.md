@@ -19,7 +19,7 @@ https://drive.google.com/file/d/1OH5wYBH6tEeJzI2UUjvILuaMHZVchkcw/view?usp=drive
 
 풀잎 리눅스를 가상머신에 설치하는 경우 
 -
-1. 가상머신을 efi 로 설정 해줘야 합니다.<br>
+가상머신을 efi 로 설정 해줘야 합니다.<br>
 
 크로미움 또는 파이어폭스 한글입력
 -
