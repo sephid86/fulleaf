@@ -4,7 +4,8 @@
 --
 이곳의 파일들은 풀잎 리눅스의 다음 업데이트에 사용될 테스트 파일들 입니다.
 
-풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.
+풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.<br>
+마지막 업데이트 2024년 06월 24일
 --
 https://drive.google.com/file/d/1OH5wYBH6tEeJzI2UUjvILuaMHZVchkcw/view?usp=drive_link
 <br>
