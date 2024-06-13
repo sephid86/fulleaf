@@ -27,7 +27,7 @@ foot 터미널 기준입니다.
 아래 내용 주석 풀어줍니다.
 set preview_images_method sixel
 
-크로미움 파이어폭스 한글입력
+크로미움 또는 파이어폭스 한글입력
 -
 이슈
 https://github.com/sephid86/fulleaf/issues/4
