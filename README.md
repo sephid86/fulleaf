@@ -12,6 +12,8 @@
 
 풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.<br>
 --
+2024-12-22 현재 설치 불가 확인되었습니다.-다음 업데이트때 뵙겠습니다.(2025년 예정)
+--
 https://drive.google.com/file/d/1OH5wYBH6tEeJzI2UUjvILuaMHZVchkcw/view?usp=drive_link
 <br>
 <br>
