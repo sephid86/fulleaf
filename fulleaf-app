@@ -13,3 +13,5 @@ libvdpau
 lib32-libvdpau
 libvdpau-va-gl
 gstreamer-vaapi
+vimix-cursors
+alsa-utils

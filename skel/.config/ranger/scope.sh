@@ -170,29 +170,29 @@ handle_image() {
             ## as above), but might fail for unsupported types.
             exit 7;;
 
-        ## Video
-        # video/*)
-        #     # Get embedded thumbnail
-        #     ffmpeg -i "${FILE_PATH}" -map 0:v -map -0:V -c copy "${IMAGE_CACHE_PATH}" && exit 6
-        #     # Get frame 10% into video
-        #     ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
-        #     exit 1;;
+        # Video
+        video/*)
+            # Get embedded thumbnail
+            ffmpeg -i "${FILE_PATH}" -map 0:v -map -0:V -c copy "${IMAGE_CACHE_PATH}" && exit 6
+            # Get frame 10% into video
+            ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
+            exit 1;;
 
-        ## Audio
-        # audio/*)
-        #     # Get embedded thumbnail
-        #     ffmpeg -i "${FILE_PATH}" -map 0:v -map -0:V -c copy \
-        #       "${IMAGE_CACHE_PATH}" && exit 6;;
+        # Audio
+        audio/*)
+            # Get embedded thumbnail
+            ffmpeg -i "${FILE_PATH}" -map 0:v -map -0:V -c copy \
+              "${IMAGE_CACHE_PATH}" && exit 6;;
 
-        ## PDF
-        # application/pdf)
-        #     pdftoppm -f 1 -l 1 \
-        #              -scale-to-x "${DEFAULT_SIZE%x*}" \
-        #              -scale-to-y -1 \
-        #              -singlefile \
-        #              -jpeg -tiffcompression jpeg \
-        #              -- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" \
-        #         && exit 6 || exit 1;;
+        # PDF
+        application/pdf)
+            pdftoppm -f 1 -l 1 \
+                     -scale-to-x "${DEFAULT_SIZE%x*}" \
+                     -scale-to-y -1 \
+                     -singlefile \
+                     -jpeg -tiffcompression jpeg \
+                     -- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" \
+                && exit 6 || exit 1;;
 
 
         ## ePub, MOBI, FB2 (using Calibre)
@@ -226,52 +226,52 @@ handle_image() {
             fi
             ;;
 
-        ## Preview archives using the first image inside.
-        ## (Very useful for comic book collections for example.)
-#         application/zip|application/x-rar|application/x-7z-compressed|\
-#             application/x-xz|application/x-bzip2|application/x-gzip|application/x-tar)
-#             local fn=""; local fe=""
-#             local zip=""; local rar=""; local tar=""; local bsd=""
-#             case "${mimetype}" in
-#                 application/zip) zip=1 ;;
-#                 application/x-rar) rar=1 ;;
-#                 application/x-7z-compressed) ;;
-#                 *) tar=1 ;;
-#             esac
-#             { [ "$tar" ] && fn=$(tar --list --file "${FILE_PATH}"); } || \
-#             { fn=$(bsdtar --list --file "${FILE_PATH}") && bsd=1 && tar=""; } || \
-#             { [ "$rar" ] && fn=$(unrar lb -p- -- "${FILE_PATH}"); } || \
-#             { [ "$zip" ] && fn=$(zipinfo -1 -- "${FILE_PATH}"); } || return
-#        
-#             fn=$(echo "$fn" | python -c "from __future__ import print_function; \
-#                     import sys; import mimetypes as m; \
-#                     [ print(l, end='') for l in sys.stdin if \
-#                       (m.guess_type(l[:-1])[0] or '').startswith('image/') ]" |\
-#                 sort -V | head -n 1)
-#             [ "$fn" = "" ] && return
-#             [ "$bsd" ] && fn=$(printf '%b' "$fn")
-#        
-#             [ "$tar" ] && tar --extract --to-stdout \
-#                 --file "${FILE_PATH}" -- "$fn" > "${IMAGE_CACHE_PATH}" && exit 6
-#             fe=$(echo -n "$fn" | sed 's/[][*?\]/\\\0/g')
-#             [ "$bsd" ] && bsdtar --extract --to-stdout \
-#                 --file "${FILE_PATH}" -- "$fe" > "${IMAGE_CACHE_PATH}" && exit 6
-#             [ "$bsd" ] || [ "$tar" ] && rm -- "${IMAGE_CACHE_PATH}"
-#             [ "$rar" ] && unrar p -p- -inul -- "${FILE_PATH}" "$fn" > \
-#                 "${IMAGE_CACHE_PATH}" && exit 6
-#             [ "$zip" ] && unzip -pP "" -- "${FILE_PATH}" "$fe" > \
-#                 "${IMAGE_CACHE_PATH}" && exit 6
-#             [ "$rar" ] || [ "$zip" ] && rm -- "${IMAGE_CACHE_PATH}"
-#             ;;
+        # Preview archives using the first image inside.
+        # (Very useful for comic book collections for example.)
+        application/zip|application/x-rar|application/x-7z-compressed|\
+            application/x-xz|application/x-bzip2|application/x-gzip|application/x-tar)
+            local fn=""; local fe=""
+            local zip=""; local rar=""; local tar=""; local bsd=""
+            case "${mimetype}" in
+                application/zip) zip=1 ;;
+                application/x-rar) rar=1 ;;
+                application/x-7z-compressed) ;;
+                *) tar=1 ;;
+            esac
+            { [ "$tar" ] && fn=$(tar --list --file "${FILE_PATH}"); } || \
+            { fn=$(bsdtar --list --file "${FILE_PATH}") && bsd=1 && tar=""; } || \
+            { [ "$rar" ] && fn=$(unrar lb -p- -- "${FILE_PATH}"); } || \
+            { [ "$zip" ] && fn=$(zipinfo -1 -- "${FILE_PATH}"); } || return
+
+            fn=$(echo "$fn" | python -c "from __future__ import print_function; \
+                    import sys; import mimetypes as m; \
+                    [ print(l, end='') for l in sys.stdin if \
+                      (m.guess_type(l[:-1])[0] or '').startswith('image/') ]" |\
+                sort -V | head -n 1)
+            [ "$fn" = "" ] && return
+            [ "$bsd" ] && fn=$(printf '%b' "$fn")
+
+            [ "$tar" ] && tar --extract --to-stdout \
+                --file "${FILE_PATH}" -- "$fn" > "${IMAGE_CACHE_PATH}" && exit 6
+            fe=$(echo -n "$fn" | sed 's/[][*?\]/\\\0/g')
+            [ "$bsd" ] && bsdtar --extract --to-stdout \
+                --file "${FILE_PATH}" -- "$fe" > "${IMAGE_CACHE_PATH}" && exit 6
+            [ "$bsd" ] || [ "$tar" ] && rm -- "${IMAGE_CACHE_PATH}"
+            [ "$rar" ] && unrar p -p- -inul -- "${FILE_PATH}" "$fn" > \
+                "${IMAGE_CACHE_PATH}" && exit 6
+            [ "$zip" ] && unzip -pP "" -- "${FILE_PATH}" "$fe" > \
+                "${IMAGE_CACHE_PATH}" && exit 6
+            [ "$rar" ] || [ "$zip" ] && rm -- "${IMAGE_CACHE_PATH}"
+            ;;
     esac
-#
-#     openscad_image() {
-#         TMPPNG="$(mktemp -t XXXXXX.png)"
-#         openscad --colorscheme="${OPENSCAD_COLORSCHEME}" \
-#             --imgsize="${OPENSCAD_IMGSIZE/x/,}" \
-#             -o "${TMPPNG}" "${1}"
-#         mv "${TMPPNG}" "${IMAGE_CACHE_PATH}"
-#     }
+
+    # openscad_image() {
+    #     TMPPNG="$(mktemp -t XXXXXX.png)"
+    #     openscad --colorscheme="${OPENSCAD_COLORSCHEME}" \
+    #         --imgsize="${OPENSCAD_IMGSIZE/x/,}" \
+    #         -o "${TMPPNG}" "${1}"
+    #     mv "${TMPPNG}" "${IMAGE_CACHE_PATH}"
+    # }
 
     case "${FILE_EXTENSION_LOWER}" in
        ## 3D models

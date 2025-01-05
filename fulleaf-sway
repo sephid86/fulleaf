@@ -2,6 +2,7 @@ sway
 wayland
 wayland-protocols
 xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
 xdg-user-dirs-gtk
 gtk3
 gtk4

@@ -41,4 +41,11 @@ alias bakall='bakweb; bakdb'
 
 #alias vit='tmux new -d;tmux send-keys "vi" C-m;tmux splitp -v;tmux resizep -D 20;tmux splitp -h;tmux selectp -t 0;tmux attach'
 
-alias r='. ranger'
+function r() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
