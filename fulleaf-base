@@ -3,3 +3,4 @@ os-prober
 ntfs-3g
 efibootmgr
 networkmanager
+grub
