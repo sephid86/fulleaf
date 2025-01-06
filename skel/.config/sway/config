@@ -63,6 +63,7 @@ focus_on_window_activation focus
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec foot -a my_term
 
     # Kill focused window
     bindsym $mod+Shift+q kill

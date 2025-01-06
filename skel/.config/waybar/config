@@ -96,7 +96,7 @@
         //"format": "{:%Y-%m-%d %H:%M}"
     },
     "cpu": {
-        "format": " {usage}%",
+        "format": "  {usage}%",
 //        "tooltip": false
     },
     "memory": {
@@ -104,7 +104,7 @@
     },
     "temperature": {
         "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         "format-critical": "{icon} {temperatureC}°C",
         "format": "{icon} {temperatureC}°C",
@@ -143,7 +143,7 @@
     },
     "pulseaudio": {
         "scroll-step": 5, // %, can be a float
-        "format": "{icon} {volume}% {format_source}",
+        "format": "{icon}  {volume}% {format_source}",
         "format-bluetooth": " {icon} {volume}% {format_source}",
         "format-bluetooth-muted": "  {icon} {format_source}",
         "format-muted": "  {format_source}",
