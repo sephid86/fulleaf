@@ -22,30 +22,4 @@ https://drive.google.com/file/d/18BUjCVj8SvtsKApVgb4azmJ48Icg4OKK/view?usp=drive
 가상머신을 efi 로 설정 해줘야 합니다.<br>
 <br>
 
-크로미움 또는 파이어폭스 한글입력
--
-이슈
-https://github.com/sephid86/fulleaf/issues/4
-참고 바랍니다.
-<br>
-<br>
-
-sway 동영상 재생중 절전모드
--
-이슈
-https://github.com/sephid86/fulleaf/issues/3
-참고 바랍니다.
-<br>
-<br>
-
-ranger 이미지 미리보기
--
-foot 터미널 기준입니다.
-
-1. aur 에서 ranger-git 설치해줍니다.
-
-2. ~/.config/ranger/rc.conf 파일에서
-아래 내용 주석 풀어줍니다. <br>
-set preview_images_method sixel
-<br>
 <br>
