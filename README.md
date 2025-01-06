@@ -4,7 +4,7 @@
 
 풀잎 리눅스 - (Fulleaf Linux) <br>
 --
-- 최근 업데이트 2025년 01월 06일
+- 최근 업데이트 2025년 01월 07일
 <br>
 이곳의 파일들은 풀잎 리눅스의 다음 업데이트에 사용될 테스트 파일들 입니다.
 <br>
@@ -12,7 +12,7 @@
 
 풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.<br>
 --
-https://drive.google.com/file/d/18BUjCVj8SvtsKApVgb4azmJ48Icg4OKK/view?usp=drive_link
+https://drive.google.com/file/d/18WRQZHoanQEq_kopzAN-6dbZcTZ1vBQM/view?usp=drive_link
 <br>
 <br>
 <br>
