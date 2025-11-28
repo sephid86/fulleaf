@@ -203,9 +203,6 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
       btrfs_root_partition="${storage}2"
     fi
 
-    boot_efi_partition="${storage}p1"
-    btrfs_root_partition="${storage}p2"
-
     echo "--> EFI Partition formatt."
     mkfs.fat -F32 "$boot_efi_partition"
 
