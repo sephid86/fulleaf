@@ -176,9 +176,7 @@ if [[ -n "$storage" && -n "$storage-mode" ]]; then
     EFI_SIZE_MB=500
 
     echo "--> sgdisk를 사용하여 파티션 테이블 초기화 및 파티션 생성"
-    sgdisk -Z "$storage" \
-      -n 1:0:+${EFI_SIZE_MB}MiB -c 1:"EFI System Partition" -t 1:EF00 \
-      -n 2:0:0 -c 2:"Fulleaf-btrfs" -t 2:8300
+    sgdisk -Z "$storage" -n 1:0:+${EFI_SIZE_MB}MiB -c 1:"EFI System Partition" -t 1:EF00 -n 2:0:0 -c 2:"Fulleaf-btrfs" -t 2:8300
 
     boot_efi_partition="${storage}p1"
     btrfs_root_partition="${storage}p2"
@@ -194,8 +192,8 @@ if [[ -n "$storage" && -n "$storage-mode" ]]; then
     btrfs subvolume create "${mount_point}/@root"
 
     echo "--> EFI 파티션 /mnt/boot 에 마운트"
-    sudo mkdir -p /mnt/boot
-    sudo mount "$boot_efi_partition" "/mnt/boot"
+    mkdir -p /mnt/boot
+    mount "$boot_efi_partition" "/mnt/boot"
 
   elif [[ "$storage-mode" -eq 1 ]]; then
     echo "Mode 1 : Keep /boot and other partitions."
@@ -305,7 +303,7 @@ arch-chroot /mnt su - %s -c 'git config --global core.editor nvim'
 
 # arch-chroot /mnt su - %s -c 'ln --symbolic /usr/share/icons/Vimix-white-cursors ~/.local/share/icons/default'
 # arch-chroot /mnt ln --symbolic /usr/share/icons/Vimix-white-cursors /etc/skel/.local/share/icons/default
-sudo sed -i '/^HOOKS=/s/udev /udev plymouth /' "$FILE_PATH"
+sed -i '/^HOOKS=/s/udev /udev plymouth /' /mnt/etc/mkinitcpio.conf
 
 # mirrorlist
 # Server = ftp.harukasan.org
