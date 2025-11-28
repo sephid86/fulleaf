@@ -164,6 +164,32 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
   if [[ "$storage_mode" -eq 0 ]]; then
     echo "Mode 0 : creating new partitions and formatting storage."
     echo "Mode 0 : All data on the storage will be deleted."
+
+    # storage=/dev/nvme0n1 
+    EFI_SIZE_MB=500
+
+    echo "--> sgdisk를 사용하여 파티션 테이블 초기화 및 파티션 생성"
+    sgdisk -Z "$storage" \
+      -n 1:0:+${EFI_SIZE_MB}MiB -c 1:"EFI System Partition" -t 1:EF00 \
+      -n 2:0:0 -c 2:"Fulleaf-btrfs" -t 2:8300
+
+    boot_efi_partition="${storage}p1"
+    btrfs_root_partition="${storage}p2"
+
+    echo "--> EFI 파티션 포맷"
+    mkfs.fat -F32 "$boot_efi_partition"
+
+    echo "--> Btrfs 루트 파티션 포맷"
+    mkfs.btrfs "$btrfs_root_partition"
+
+    echo "--> Btrfs 파티션 임시 마운트 및 서브볼륨 생성"
+    mount $btrfs_root_partition/mnt
+    btrfs subvolume create "${mount_point}/@root"
+
+    echo "--> EFI 파티션 /mnt/boot 에 마운트"
+    sudo mkdir -p /mnt/boot
+    sudo mount "$boot_efi_partition" "/mnt/boot"
+
   elif [[ "$storage_mode" -eq 1 ]]; then
     echo "Mode 1 : Keep /boot and other partitions."
     echo "Mode 1 : Format only the root (/) partition."
