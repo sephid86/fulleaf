@@ -379,6 +379,7 @@ arch-chroot /mnt pacman -Syu
 echo "CPU Vendor: $cpu_vendor"
 if [[ "$cpu_vendor" == "intel" || "$cpu_vendor" == "amd" ]]; then
   arch-chroot /mnt pacman -Sy --noconfirm $cpu_vendor-ucode
+  echo "KEYMAP=us" >> /mnt/etc/vconsole.conf # 가상환경에서 mkinitcpio 에러 방지.
   arch-chroot /mnt mkinitcpio -P
 fi
 
