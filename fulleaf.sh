@@ -460,7 +460,7 @@ rmdir "$TEMP_MNT"
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
 
 # GTK 테마 설정
-arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme \"'Adwaita'\""
+arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme \"'Adwaita-dark'\""
 
 # 아이콘 테마 설정
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/icon-theme \"'Adwaita'\""
