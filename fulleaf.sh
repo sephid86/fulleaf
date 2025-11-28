@@ -45,7 +45,7 @@ error_handler() {
 }
 
 add_env() {
-  local CONF_FILE="/etc/environment"
+  local CONF_FILE="/mnt/etc/environment"
   local var_name="$1"
   local var_value="$2"
   local new_line="${var_name}=${var_value}"
@@ -321,9 +321,8 @@ cp /etc/DIR_COLORS /mnt/etc
 cp /etc/bash.bashrc /mnt/etc
 cp -rf skel /mnt/etc/
 cp -rf skel/.config /mnt/root/
-cp -rf /root/.bashrc /mnt/root/
+cp -rf root/.bashrc /mnt/root/
 arch-chroot /mnt sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
-arch-chroot /mnt su - %s -c 'git config --global core.editor nvim'
 
 # arch-chroot /mnt su - %s -c 'ln --symbolic /usr/share/icons/Vimix-white-cursors ~/.local/share/icons/default'
 # arch-chroot /mnt ln --symbolic /usr/share/icons/Vimix-white-cursors /etc/skel/.local/share/icons/default
@@ -339,20 +338,12 @@ add_env VISUAL nvim
 add_env ELECTRON_ENABLE_WAYLAND 1
 add_env ELECTRON_OZONE_PLATFORM_HINT wayland
 add_env GDK_BACKEND wayland
-add_env QT_QPA_PLATFORM wayland;xcb
+add_env QT_QPA_PLATFORM "wayland;xcb"
 add_env CHROME_FLAGS "--enable-features=vulkan --use-angle=vulkan"
 add_env MOZ_ENABLE_WAYLAND 1
 
 add_env XCURSOR_THEME Vimix-white-cursors
 add_env XCURSOR_SIZE 24
-
-dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita'"
-dconf write /org/gnome/desktop/interface/icon-theme "'Adwaita'"
-dconf write /org/gnome/desktop/interface/cursor-theme "'Vimix-white-cursors'"
-dconf write /org/gnome/desktop/interface/cursor-size "24"
-dconf write /org/gnome/desktop/input-sources/sources "[('ibus','hangul')]"
-dconf write /org/gnome/desktop/input-sources/xkb-options "['korean:ralt_hangul','korean:rctrl_hanja']"
 
 gtk_settings="[Settings]
 gtk-theme-name=Adwaita-dark
@@ -367,8 +358,9 @@ echo "$gtk_settings" > "/etc/skel/.config/gtk-4.0/settings.ini"
 
 #4-user
 echo root:$ROOT_PW | arch-chroot /mnt chpasswd
-arch-chroot /mnt useradd -m -g users -G wheel -s /bin/bash $2
+arch-chroot /mnt useradd -m -g users -G wheel -s /bin/bash $USER_ID
 echo $USER_ID:$USER_PW | arch-chroot /mnt chpasswd
+arch-chroot /mnt su - $USER_ID -c 'git config --global core.editor nvim'
 
 arch-chroot /mnt pacman -Sy --noconfirm $(cat fulleaf-font-n-theme)
 #5-Boot loader
@@ -461,6 +453,17 @@ done <<< "$VEC_PARTITIONS"
 rmdir "$TEMP_MNT"
 
 #7-GUI install
+
+arch-chroot /mnt su - "${USER_ID}" -c 'dbus-launch gsettings set org.gnome.desktop.input-sources xkb-options "['\''korean:ralt_hangul'\'','\''korean:rctrl_hanja'\'']"'
+arch-chroot /mnt su - "${USER_ID}" -c 'dbus-launch gsettings set org.gnome.desktop.input-sources sources "[('\''ibus'\'','\''hangul'\'')]"'
+arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
+arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
+arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'"
+arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface cursor-theme 'Vimix-white-cursors'"
+arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface cursor-size 24"
+
+arch-chroot /mnt mkdir -p /etc/skel/.config/dconf
+arch-chroot /mnt cp /home/${USER_ID}/.config/dconf/user /etc/skel/.config/dconf
 #gnome -
 if [ "$INSTALL_GNOME" == "true" ]; then
   pacfile fulleaf-gui fulleaf-gnome
