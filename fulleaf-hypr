@@ -9,6 +9,7 @@ gtk4
 qt6-wayland
 qt6-svg
 mbedtls
+gnome-themes-extra
 xorg-xwayland
 grim
 slurp

@@ -1,0 +1,37 @@
+window {
+    /* 배경 색상을 RGBA 형식으로 지정하여 투명도를 조절 */
+    /* R=36, G=36, B=36 은 어두운 회색 계열 색상입니다 */
+    /* A=0.9 부분에서 0.0 (완전 투명) 부터 1.0 (완전 불투명) 사이로 조절하세요 */
+    background-color: rgba(36, 36, 36, 0.5);
+    
+}
+
+#input {
+    background-color: rgba(59, 66, 82, 0.5); /* 입력창도 투명하게 */
+    color: #e5e9f0;
+}
+
+#input:focus {
+    /* 배경 색상을 눈에 띄는 색상으로 변경 */
+    background-color: rgba(59, 66, 82, 0.9); /* 예시: 밝은 파란색 */
+    color: #ffffff;
+
+    /* 테두리 색상도 변경하여 강조 (선택 사항) */
+    border: 1px solid #ffffff;
+}
+/* 어플리케이션 목록을 담고 있는 내부 박스 */
+#inner-box {
+    background-color: rgba(36, 36, 36, 0.7); /* 목록 배경도 투명하게 (창 배경보다 약간 더 투명하게 설정 가능) */
+}
+
+/* 목록의 개별 항목 (drun 결과 목록) */
+#entry {
+    background-color: rgba(0, 0, 0, 0.0); /* 기본 항목 배경은 완전히 투명하게 설정 */
+    color: #ffffff;
+    /* padding, margin 등 다른 스타일 유지 */
+}
+
+/* 선택된 항목 (하이라이트 부분) */
+#entry:selected {
+    background-color: rgba(94, 129, 172, 0.7); /* 선택된 항목만 강조색으로 투명하게 */
+}
