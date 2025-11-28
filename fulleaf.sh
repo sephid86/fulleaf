@@ -12,7 +12,7 @@
 usage() {
   echo "usage: $0 --userid <ID> --userpw <PW> --rootpw <PW>"
   echo "        [--tmode] [--gnome] [--hypr] [--sway]"
-  echo "        [--storage </dev/storage>] [--storage-mode <Number>]"
+  echo "        [--storage </dev/storage>] [--storage_mode <Number>]"
   echo " "
   echo "Required options: --userid, --userpw, --rootpw"
   echo " "
@@ -25,9 +25,9 @@ usage() {
   echo " the user can manually set up partitions and mount them to proceed with installation."
   echo " Required mount points: /mnt and /mnt/boot."
   echo " "
-  echo "--storage-mode 0 : creating new partitions and formatting storage."
+  echo "--storage_mode 0 : creating new partitions and formatting storage."
   echo "                  All data on the storage will be deleted."
-  echo "--storage-mode 1 : Keep /boot and other partitions."
+  echo "--storage_mode 1 : Keep /boot and other partitions."
   echo "                  Format only the root (/) partition."
   exit 1
 }
@@ -86,7 +86,7 @@ INSTALL_SWAY="false"
 tmode="false"
 
 
-ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,tmode,storage:,storage-mode:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@") || true
+ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,tmode,storage:,storage_mode:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@")
 
 if [ $? -ne 0 ]; then
   usage
@@ -113,8 +113,8 @@ while true; do
       needs_storage=false
       shift 2
       ;;
-    --storage-mode)
-      storage="$2"
+    --storage_mode)
+      storage_mode="$2"
       shift 2
       ;;
     --gnome)
@@ -174,10 +174,10 @@ ROOT_MNT="/mnt"
 BOOT_MNT="/mnt/boot"
 PARTITION_LABEL="Fulleaf"
 
-if [[ -n "$storage" && -n "$storage-mode" ]]; then
+if [[ -n "$storage" && -n "$storage_mode" ]]; then
   echo "partition configuration is in progress..."
 
-  if [[ "$storage-mode" -eq 0 ]]; then
+  if [[ "$storage_mode" -eq 0 ]]; then
     echo "Mode 0 : creating new partitions and formatting storage."
     echo "Mode 0 : All data on the storage will be deleted."
 
@@ -185,7 +185,7 @@ if [[ -n "$storage" && -n "$storage-mode" ]]; then
     EFI_SIZE_MB=500
 
     echo "--> sgdisk를 사용하여 파티션 테이블 초기화 및 파티션 생성"
-    sgdisk -o -n 1:0:+${EFI_SIZE_MB}MiB -t 1:EF00 -c "EFI-Fulleaf" -n 2:0:0 -t 2:8300 -c "Fulleaf" $storage
+    sgdisk -o -n 1:0:+${EFI_SIZE_MB}M -t 1:EF00 -c "EFI-Fulleaf" -n 2:0:0 -t 2:8300 -c "Fulleaf" $storage
 
     boot_efi_partition="${storage}p1"
     btrfs_root_partition="${storage}p2"
@@ -204,7 +204,7 @@ if [[ -n "$storage" && -n "$storage-mode" ]]; then
     mkdir -p /mnt/boot
     mount "$boot_efi_partition" "/mnt/boot"
 
-  elif [[ "$storage-mode" -eq 1 ]]; then
+  elif [[ "$storage_mode" -eq 1 ]]; then
     echo "Mode 1 : Keep /boot and other partitions."
     echo "Mode 1 : Format only the root (/) partition."
 
