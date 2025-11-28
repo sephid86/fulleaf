@@ -187,7 +187,10 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     # storage=/dev/nvme0n1 
     EFI_SIZE_MB=500
 
-    echo "--> sgdisk를 사용하여 파티션 테이블 초기화 및 파티션 생성"
+    umount ${storage}* 2>/dev/null || true
+    umount ${storage}p* 2>/dev/null || true
+
+    echo "--> sgdisk - Partition table init and creating.."
     sgdisk -o -n 1:0:+${EFI_SIZE_MB}M -t 1:EF00 -c "EFI-Fulleaf" -n 2:0:0 -t 2:8300 -c "Fulleaf" $storage
 
     if [[ "$storage" == *nvme* ]]; then
