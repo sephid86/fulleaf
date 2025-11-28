@@ -1,5 +1,5 @@
 ![ss24-01-31-175854](https://github.com/sephid86/fulleaf/assets/77107998/80d2117e-f617-4ab1-8634-5603873e92ba)
-![ss25-11-28-150053](https://github.com/sephid86/fulleaf/assets/bd0f07d7-b7ab-421c-ae62-b5aaa0dac918)
+![ss25-11-28-150053](https://github.com/sephid86/fulleaf/assets/77107998/bd0f07d7-b7ab-421c-ae62-b5aaa0dac918)
 <img width="1920" height="1080" alt="ss25-11-28-150053" src="https://github.com/user-attachments/assets/bd0f07d7-b7ab-421c-ae62-b5aaa0dac918" />
 
 <br>
