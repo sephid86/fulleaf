@@ -211,7 +211,7 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
 
     echo "--> Btrfs Partition crate volume and mount. : /"
     mkdir -p /mnt
-    mount $btrfs_root_partition/mnt
+    mount $btrfs_root_partition /mnt
     btrfs subvolume create "${mount_point}/@root"
 
     echo "--> EFI Partition mount. : /mnt/boot mount."
