@@ -353,10 +353,10 @@ gtk-icon-theme-name=Adwaita
 gtk-cursor-theme-name=Vimix-white-cursors
 gtk-cursor-theme-size=24"
 
-mkdir -p "/etc/skel/.config/gtk-3.0"
-mkdir -p "/etc/skel/.config/gtk-4.0"
-echo "$gtk_settings" > "/etc/skel/.config/gtk-3.0/settings.ini"
-echo "$gtk_settings" > "/etc/skel/.config/gtk-4.0/settings.ini"
+mkdir -p "/mnt/etc/skel/.config/gtk-3.0"
+mkdir -p "/mnt/etc/skel/.config/gtk-4.0"
+echo "$gtk_settings" > "/mnt/etc/skel/.config/gtk-3.0/settings.ini"
+echo "$gtk_settings" > "/mnt/etc/skel/.config/gtk-4.0/settings.ini"
 
 #4-user
 echo root:$ROOT_PW | arch-chroot /mnt chpasswd
@@ -509,7 +509,7 @@ if [ "$INSTALL_HYPR" == "true" ]; then
 # user = "greeter" 
 # " > /etc/greetd/regreet.toml
 
-arch-chroot /mnt systemctl enable regreet
+# arch-chroot /mnt systemctl enable regreet
   fi
 fi
 #sway -
@@ -530,11 +530,21 @@ fi
 
 #8-systemd
 arch-chroot /mnt systemctl enable NetworkManager
-arch-chroot /mnt systemctl enable plymouth-start
+arch-chroot /mnt systemctl enable plymouth-start || true
 
 if [[ "$INSTALL_GNOME" == "true" || "$INSTALL_HYPR" == "true" || "$INSTALL_SWAY" == "true" ]]; then
   arch-chroot /mnt systemctl enable rtkit-daemon
 fi
 
 #-fisnish-
-arch-chroot /mnt mkinitcpio -P
+arch-chroot /mnt mkinitcpio -P || true
+
+echo ""
+echo ""
+echo ""
+echo "- Fulleaf Linux -"
+echo ""
+echo "Install complete."
+echo ""
+echo ""
+echo ""
