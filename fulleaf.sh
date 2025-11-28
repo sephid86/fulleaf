@@ -453,9 +453,10 @@ done <<< "$VEC_PARTITIONS"
 rmdir "$TEMP_MNT"
 
 #7-GUI install
-
-arch-chroot /mnt su - "${USER_ID}" -c 'dbus-launch gsettings set org.gnome.desktop.input-sources xkb-options "['\''korean:ralt_hangul'\'','\''korean:rctrl_hanja'\'']"'
-arch-chroot /mnt su - "${USER_ID}" -c 'dbus-launch gsettings set org.gnome.desktop.input-sources sources "[('\''ibus'\'','\''hangul'\'')]"'
+CMD="dbus-launch gsettings set org.gnome.desktop.input-sources sources \"[('ibus','hangul')]\""
+arch-chroot /mnt runuser -l "${USER_ID}" -c "$CMD"
+CMD="dbus-launch gsettings set org.gnome.desktop.input-sources xkb-options \"['korean:ralt_hangul','korean:rctrl_hanja']\""
+arch-chroot /mnt runuser -l "${USER_ID}" -c "$CMD"
 arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
 arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
 arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'"
