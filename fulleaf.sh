@@ -38,6 +38,9 @@ error_handler() {
   echo "Line : ${BASH_LINENO[0]}"
   echo "${BASH_COMMAND}"
   echo "----------------------------------------"
+  if [[ "${BASH_COMMAND}" == *getopt* ]]; then
+    usage >&2
+  fi
   exit 1
 }
 
@@ -86,7 +89,7 @@ INSTALL_SWAY="false"
 tmode="false"
 
 
-ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,tmode,storage:,storage_mode:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@") || true
+ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,tmode,storage:,storage_mode:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@")
 
 if [ $? -ne 0 ]; then
   usage >&2
