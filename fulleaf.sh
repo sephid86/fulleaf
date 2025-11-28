@@ -312,7 +312,7 @@ cp /etc/os-release /mnt/etc/os-release
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 echo ko_KR.EUC-KR EUC-KR > /mnt/etc/locale.gen
 echo ko_KR.UTF-8 UTF-8 >> /mnt/etc/locale.gen
-echo ko_KR.UTF-8 UTF-8 >> /mnt/etc/locale.gen 
+echo en_US.UTF-8 UTF-8 >> /mnt/etc/locale.gen 
 arch-chroot /mnt locale-gen
 echo LANG=ko_KR.UTF-8 > /mnt/etc/locale.conf
 echo fulleaf > /mnt/etc/hostname
