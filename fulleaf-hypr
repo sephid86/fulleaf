@@ -1,7 +1,7 @@
-sway
+hyprland
 wayland
 wayland-protocols
-xdg-desktop-portal-hypr
+xdg-desktop-portal-hyprland
 xdg-user-dirs
 xdg-user-dirs-gtk
 gtk3

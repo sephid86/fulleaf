@@ -23,8 +23,8 @@ lib32-libvdpau
 libvdpau-va-gl
 gstreamer-vaapi
 ffmpegthumbnailer
-vulkan
-vulkan-utils
+vulkan-icd-loader
+vulkan-tools
 foot
 mpv
 libreoffice-fresh-ko
