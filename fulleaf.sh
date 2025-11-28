@@ -207,7 +207,7 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     mkfs.fat -F32 "$boot_efi_partition"
 
     echo "--> Btrfs Partiton formatt."
-    mkfs.btrfs "$btrfs_root_partition"
+    mkfs.btrfs -f "$btrfs_root_partition"
 
     echo "--> Btrfs Partition crate volume and mount. : /"
     mkdir -p /mnt
@@ -317,8 +317,8 @@ arch-chroot /mnt locale-gen
 echo LANG=ko_KR.UTF-8 > /mnt/etc/locale.conf
 echo fulleaf > /mnt/etc/hostname
 echo \"MAKEFLAGS='-j$(nproc)'\" >> /mnt/etc/makepkg.conf
-cp /etc/DIR_COLORS /mnt/etc
-cp /etc/bash.bashrc /mnt/etc
+# cp /etc/DIR_COLORS /mnt/etc
+# cp /etc/bash.bashrc /mnt/etc
 cp -rf skel /mnt/etc/
 cp -rf skel/.config /mnt/root/
 cp -rf root/.bashrc /mnt/root/
@@ -362,7 +362,6 @@ arch-chroot /mnt useradd -m -g users -G wheel -s /bin/bash $USER_ID
 echo $USER_ID:$USER_PW | arch-chroot /mnt chpasswd
 arch-chroot /mnt su - $USER_ID -c 'git config --global core.editor nvim'
 
-arch-chroot /mnt pacman -Sy --noconfirm $(cat fulleaf-font-n-theme)
 #5-Boot loader
 
 CPUINFO=$(grep "vendor_id" /proc/cpuinfo | head -n 1 | awk '{print $3}')
