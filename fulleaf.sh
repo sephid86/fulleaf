@@ -488,7 +488,7 @@ arch-chroot /mnt cp /home/${USER_ID}/.config/dconf/user /etc/skel/.config/dconf
 #gnome -
 if [ "$INSTALL_GNOME" == "true" ]; then
   pacfile fulleaf-gui fulleaf-gnome
-  arch-chroot /mnt pacman -R gnome-software gnome-console
+  arch-chroot /mnt pacman -R --noconfirm gnome-software gnome-console
   arch-chroot /mnt systemctl enable gdm
 fi
 
