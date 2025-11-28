@@ -4,7 +4,7 @@
 error_handler() {
   echo "----------------------------------------"
   echo "ERROR"
-  echo "Line : ${LINENO}"
+  echo "Line : ${BASH_LINENO[0]}"
   echo "${BASH_COMMAND}"
   echo "----------------------------------------"
   exit 1
