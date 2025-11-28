@@ -529,7 +529,7 @@ if [ "$INSTALL_SWAY" == "true" ]; then
 fi
 
 #8-systemd
-arCh-chroot /mnt systemctl enable NetworkManager
+arch-chroot /mnt systemctl enable NetworkManager
 arch-chroot /mnt systemctl enable plymouth-start
 
 if [[ "$INSTALL_GNOME" == "true" || "$INSTALL_HYPR" == "true" || "$INSTALL_SWAY" == "true" ]]; then
