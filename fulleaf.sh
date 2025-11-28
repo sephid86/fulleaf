@@ -221,8 +221,8 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
   elif [[ "$storage_mode" -eq 1 ]]; then
     echo "Mode 1 : Keep /boot and other partitions."
     echo "Mode 1 : Format only the root (/) partition."
-
-    PART_DEV_ROOT=$(lsblk "$storage" -o NAME,FSTYPE,MOUNTPOINT | grep -E 'ext4|btrfs|xfs|f2fs' | awk '{print "/dev/"$1}' | head -n 1)
+    PART_DEV_BOOT=$(lsblk "$storage" -o PATH,FSTYPE --noheadings | grep -E 'vfat' | awk '{print $1}' | head -n 1)
+    # PART_DEV_ROOT=$(lsblk "$storage" -o NAME,FSTYPE,MOUNTPOINT | grep -E 'ext4|btrfs|xfs|f2fs' | awk '{print "/dev/"$1}' | head -n 1)
     FSTYPE_ROOT=$(lsblk "$PART_DEV_ROOT" -o FSTYPE --noheadings)
 
     if [ -z "$PART_DEV_ROOT" ] || [ -z "$FSTYPE_ROOT" ]; then
