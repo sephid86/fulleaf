@@ -77,7 +77,7 @@ usage() {
   exit 1
 }
 
-ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@")
+ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,tmode,storage:,storage-mode:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@") || true
 
 if [ $? -ne 0 ]; then
   usage
@@ -104,6 +104,10 @@ while true; do
       needs_storage=false
       shift 2
       ;;
+    --storage-mode)
+      storage="$2"
+      shift 2
+      ;;
     --gnome)
       INSTALL_GNOME="true"
       shift 1
@@ -128,7 +132,7 @@ while true; do
       break
       ;;
     *)
-      echo "Unknown Error" >&2
+      usage >&2
       exit 1
       ;;
   esac
@@ -136,11 +140,11 @@ done
 
 if [ "$tmode" == "true" ]; then
   echo "----- Input User ID : "
-  read $USER_ID
+  read USER_ID
   echo "----- Input User Password : "
-  read -s $USER_PW
+  read -s USER_PW
   echo "----- Input Root Password : "
-  read -s $ROOT_PW
+  read -s ROOT_PW
 fi
 
 if [[ -z "$USER_ID" || -z "$USER_PW" || -z "$ROOT_PW" ]]; then
@@ -148,20 +152,23 @@ if [[ -z "$USER_ID" || -z "$USER_PW" || -z "$ROOT_PW" ]]; then
   usage
 fi
 
-echo "USER_ID:      $USER_ID"
-echo "INSTALL_GNOME: $INSTALL_GNOME"
-echo "INSTALL_HYPR:  $INSTALL_HYPR"
-echo "INSTALL_SWAY:  $INSTALL_SWAY"
+echo "-----------------------------------------"
+echo "User ID : $USER_ID"
+echo "Storage Device : $storage"
+echo "Install GNOME: $INSTALL_GNOME"
+echo "Install Hypralnd :  $INSTALL_HYPR"
+echo "Install Sway:  $INSTALL_SWAY"
+echo "-----------------------------------------"
 
 #1-diskset
 ROOT_MNT="/mnt"
 BOOT_MNT="/mnt/boot"
 PARTITION_LABEL="Fulleaf"
 
-if [[ -n "$storage" && -n "$storage_mode" ]]; then
+if [[ -n "$storage" && -n "$storage-mode" ]]; then
   echo "partition configuration is in progress..."
 
-  if [[ "$storage_mode" -eq 0 ]]; then
+  if [[ "$storage-mode" -eq 0 ]]; then
     echo "Mode 0 : creating new partitions and formatting storage."
     echo "Mode 0 : All data on the storage will be deleted."
 
@@ -190,7 +197,7 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     sudo mkdir -p /mnt/boot
     sudo mount "$boot_efi_partition" "/mnt/boot"
 
-  elif [[ "$storage_mode" -eq 1 ]]; then
+  elif [[ "$storage-mode" -eq 1 ]]; then
     echo "Mode 1 : Keep /boot and other partitions."
     echo "Mode 1 : Format only the root (/) partition."
 
