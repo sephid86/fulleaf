@@ -317,6 +317,8 @@ arch-chroot /mnt locale-gen
 echo LANG=ko_KR.UTF-8 > /mnt/etc/locale.conf
 echo fulleaf > /mnt/etc/hostname
 echo \"MAKEFLAGS='-j$(nproc)'\" >> /mnt/etc/makepkg.conf
+echo [multilib] >> /mnt/etc/pacman.conf
+echo "Include = /etc/pacman.d/mirrorlist" >> /mnt/etc/pacman.conf
 # cp /etc/DIR_COLORS /mnt/etc
 # cp /etc/bash.bashrc /mnt/etc
 cp -rf skel /mnt/etc/
