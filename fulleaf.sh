@@ -190,6 +190,16 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     echo "--> sgdisk를 사용하여 파티션 테이블 초기화 및 파티션 생성"
     sgdisk -o -n 1:0:+${EFI_SIZE_MB}M -t 1:EF00 -c "EFI-Fulleaf" -n 2:0:0 -t 2:8300 -c "Fulleaf" $storage
 
+    if [[ "$storage" == *nvme* ]]; then
+      # NVMe 디스크 (/dev/nvme0n1p1)
+      boot_efi_partition="${storage}p1"
+      btrfs_root_partition="${storage}p2"
+    else
+      # SATA/IDE 디스크 (/dev/vda1, /dev/sda1)
+      boot_efi_partition="${storage}1"
+      btrfs_root_partition="${storage}2"
+    fi
+
     boot_efi_partition="${storage}p1"
     btrfs_root_partition="${storage}p2"
 
