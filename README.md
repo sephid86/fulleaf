@@ -1,4 +1,5 @@
 ![ss24-01-31-175854](https://github.com/sephid86/fulleaf/assets/77107998/80d2117e-f617-4ab1-8634-5603873e92ba)
+![ss25-11-28-150053](https://github.com/sephid86/fulleaf/assets/bd0f07d7-b7ab-421c-ae62-b5aaa0dac918)
 <img width="1920" height="1080" alt="ss25-11-28-150053" src="https://github.com/user-attachments/assets/bd0f07d7-b7ab-421c-ae62-b5aaa0dac918" />
 
 <br>
@@ -9,8 +10,7 @@
 - 최근 테스트 2025년 11월 23일 : 설치 불가 <br>
 - ### 잠정적으로 개발을 중단합니다.
 갈아 엎고 새로 만드는 중입니다. coming soon...
-- 제 NixOS 닷파일과 제가 만든 위젯은 아래 링크로 이동하시면 됩니다.<br>
-https://github.com/sephid86/nixos <br>
+
 <br>
 이곳의 파일들은 풀잎 리눅스의 다음 업데이트에 사용될 테스트 파일들 입니다.
 <br>
