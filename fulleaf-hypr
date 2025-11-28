@@ -2,8 +2,8 @@ hyprland
 wayland
 wayland-protocols
 xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
 xdg-user-dirs
-xdg-user-dirs-gtk
 gtk3
 gtk4
 qt6-wayland
