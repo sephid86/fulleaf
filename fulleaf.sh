@@ -203,17 +203,18 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     boot_efi_partition="${storage}p1"
     btrfs_root_partition="${storage}p2"
 
-    echo "--> EFI 파티션 포맷"
+    echo "--> EFI Partition formatt."
     mkfs.fat -F32 "$boot_efi_partition"
 
-    echo "--> Btrfs 루트 파티션 포맷"
+    echo "--> Btrfs Partiton formatt."
     mkfs.btrfs "$btrfs_root_partition"
 
-    echo "--> Btrfs 파티션 임시 마운트 및 서브볼륨 생성"
+    echo "--> Btrfs Partition crate volume and mount. : /"
+    mkdir -p /mnt
     mount $btrfs_root_partition/mnt
     btrfs subvolume create "${mount_point}/@root"
 
-    echo "--> EFI 파티션 /mnt/boot 에 마운트"
+    echo "--> EFI Partition mount. : /mnt/boot mount."
     mkdir -p /mnt/boot
     mount "$boot_efi_partition" "/mnt/boot"
 
