@@ -1,5 +1,36 @@
 #!/usr/bin/env bash
 
+# --------------------------------------------------
+# Fulleaf linux install script v1
+#
+# Author : sephid86 (sephid86@gmail.com)
+# Created On : 2025-11-28
+# Copyright (c) 2025 sephid86 (sephid86@gmail.com)
+# License : GNU GPLv3
+# --------------------------------------------------
+
+usage() {
+  echo "usage: $0 --userid <ID> --userpw <PW> --rootpw <PW>"
+  echo "        [--tmode] [--gnome] [--hypr] [--sway]"
+  echo "        [--storage </dev/storage>] [--storage-mode <Number>]"
+  echo " "
+  echo "Required options: --userid, --userpw, --rootpw"
+  echo " "
+  echo "-- Caution --"
+  echo "  If running in a terminal, do not use --userid <ID>, --userpw <PW>, --rootpw <PW>."
+  echo " Use --tmode for security."
+  echo " "
+  echo "Note: "
+  echo "  If the --storage </dev/storage> option is missing,"
+  echo " the user can manually set up partitions and mount them to proceed with installation."
+  echo " Required mount points: /mnt and /mnt/boot."
+  echo " "
+  echo "--storage-mode 0 : creating new partitions and formatting storage."
+  echo "                  All data on the storage will be deleted."
+  echo "--storage-mode 1 : Keep /boot and other partitions."
+  echo "                  Format only the root (/) partition."
+  exit 1
+}
 #c-code execl("/usr/bin/env", "bash", script_path, "--userpw", "aa", "--rootpw", "bb", (char *)NULL);
 error_handler() {
   echo "----------------------------------------"
@@ -54,28 +85,6 @@ INSTALL_HYPR="false"
 INSTALL_SWAY="false"
 tmode="false"
 
-usage() {
-  echo "usage: $0 --userid <ID> --userpw <PW> --rootpw <PW>"
-  echo "        [--tmode] [--gnome] [--hypr] [--sway]"
-  echo "        [--storage </dev/storage>] [--storage-mode <Number>]"
-  echo " "
-  echo "Required options: --userid, --userpw, --rootpw"
-  echo " "
-  echo "-- Caution --"
-  echo "  If running in a terminal, do not use --userid <ID>, --userpw <PW>, --rootpw <PW>."
-  echo " Use --tmode for security."
-  echo " "
-  echo "Note: "
-  echo "  If the --storage </dev/storage> option is missing,"
-  echo " the user can manually set up partitions and mount them to proceed with installation."
-  echo " Required mount points: /mnt and /mnt/boot."
-  echo " "
-  echo "--storage-mode 0 : creating new partitions and formatting storage."
-  echo "                  All data on the storage will be deleted."
-  echo "--storage-mode 1 : Keep /boot and other partitions."
-  echo "                  Format only the root (/) partition."
-  exit 1
-}
 
 ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,tmode,storage:,storage-mode:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@") || true
 
@@ -176,7 +185,7 @@ if [[ -n "$storage" && -n "$storage-mode" ]]; then
     EFI_SIZE_MB=500
 
     echo "--> sgdisk를 사용하여 파티션 테이블 초기화 및 파티션 생성"
-    sgdisk -Z "$storage" -n 1:0:+${EFI_SIZE_MB}MiB -c 1:"EFI System Partition" -t 1:EF00 -n 2:0:0 -c 2:"Fulleaf-btrfs" -t 2:8300
+    sgdisk -o -n 1:0:+${EFI_SIZE_MB}MiB -t 1:EF00 -c "EFI-Fulleaf" -n 2:0:0 -t 2:8300 -c "Fulleaf" $storage
 
     boot_efi_partition="${storage}p1"
     btrfs_root_partition="${storage}p2"
@@ -282,6 +291,7 @@ fi
 
 #2-pacstrap
 pacstrap /mnt $(cat fulleaf-pacstrap)
+genfstab -U /mnt >> /mnt/etc/fstab
 
 #3-env
 cp /etc/os-release /mnt/etc/os-release
