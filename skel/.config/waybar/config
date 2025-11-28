@@ -8,7 +8,7 @@
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
     "modules-center": ["sway/window"],
     //"modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["mpd", "idle_inhibitor", "temperature", "cpu", "memory","network", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "clock"],
+    "modules-right": ["mpd", "idle_inhibitor", "temperature", "cpu", "memory","network", "bluetooth", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "clock"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -111,7 +111,7 @@
         "format-icons": ["", "", ""]
     },
     "backlight": {
-        // "device": "acpi_video1",
+        // "controller": "acpi_video1",
         "format": "{icon} {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
@@ -141,11 +141,21 @@
         "format-disconnected": "Disconnected ⚠ {ifname}",
         "format-alt": " {ifname}: {ipaddr}/{cidr}"
     },
+"bluetooth": {
+	"format": " {status}",
+	"format-connected": " {device_alias}",
+	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+	"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+	"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+},
     "pulseaudio": {
         "scroll-step": 5, // %, can be a float
         "format": "{icon}  {volume}% {format_source}",
-        "format-bluetooth": " {icon} {volume}% {format_source}",
-        "format-bluetooth-muted": "  {icon} {format_source}",
+        "format-bluetooth": " {volume}% {format_source}",
+        "format-bluetooth-muted": "  {format_source}",
         "format-muted": "  {format_source}",
         "format-source": " {volume}%",
         "format-source-muted": "",
@@ -161,6 +171,7 @@
         "on-click": "pavucontrol",
         "on-click-right": "foot -a pw-top pw-top"
     },
+
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",

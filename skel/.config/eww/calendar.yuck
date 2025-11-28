@@ -1,0 +1,35 @@
+
+(defwidget calendar_widget []
+  (box :class "cpu-info-container"
+       :orientation "v"
+       :halign "center"
+       :space-evenly false
+
+    (label :text "Calendar"
+           :class "main-title-label"
+           :halign "start")
+
+    (box :class "separator-line"
+         :height 2
+         :halign "fill")
+
+    ;; EWW 내장 캘린더 위젯 사용
+    (calendar :class "eww-calendar"
+              :halign "center"
+              ;; :onchange "echo Date changed to {}" 
+              )
+  ) ;; <-- 여기에 box 위젯을 닫는 괄호가 있어야 합니다.
+)
+
+;; 최종 달력 윈도우 정의
+(defwindow calendar-desktop-widget
+  :geometry (geometry :x "320px"
+                      :y "100px"
+                      :anchor "top right"
+                      )
+  :stacking "bg"
+  :monitor 0
+  :window-type "desktop"
+  :wm-ignore false
+  (calendar_widget)
+)

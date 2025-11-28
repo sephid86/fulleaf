@@ -15,7 +15,7 @@ case $op in
     swaylock
     ;;
   logout)
-    hyprctl exit
+    systemctl --user exit && hyprctl dispatch exit
     ;;
   biosboot)
     systemctl reboot --firmware-setup

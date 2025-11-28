@@ -10,3 +10,5 @@ vim.g.sw=2
 vim.g.sts=2
 
 vim.cmd("set fencs=ucs-bom,utf-8,default,euc-kr,cp949")
+
+vim.opt.clipboard = "unnamedplus"

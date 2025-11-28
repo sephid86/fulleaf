@@ -1,0 +1,177 @@
+
+* {
+    font-family: monospace; 
+    /*font-size: 20px;            [>v1.4.1,字体写在此处窗口随机偏移<]*/
+    border: none;
+}
+
+/*全局窗口*/
+window {
+    margin: 0px;
+    font-size: 14px;            /*v1.4.1,字体写在此处保证每次窗口都居中*/
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow:
+        0 0 1px rgba(255,255,255,0.6),
+        inset 0 1px rgba(255,255,255,0.6),
+        inset 0 -1px rgba(255,255,255,0.6),
+        inset 1px 0 rgba(255,255,255,0.6),
+        inset -1px 0 rgba(255,255,255,0.6);
+    background-image: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.6) 0%,
+        rgba(255,255,255,0.2) 40%,
+        rgba(255,255,255,0) 45%
+    ),radial-gradient(
+        24px 3px at bottom center,
+        rgba(255,255,255,0.6) 0%,
+        rgba(255,255,255,0) 100%
+    );
+    background-color: rgba(0,0,0,0.1);
+    transition: all 0.1s linear;
+            
+}
+
+/*搜索框*/
+#input {
+    margin: 8px;
+    border-radius: 2px;
+    border: 2px outset rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.3);
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+}
+
+/*搜索框的图标颜色*/
+#input image {
+    border: none;
+    color: white;
+}
+
+/*聚集在搜索框时的特效*/
+#input:focus {
+      box-shadow: rgba(255,255,255,0.4) 0px 0px 10px 2px, rgba(255,255,255, 0.65) 0px 4px 6px -1px, rgba(255,255,255, 0.08) 0px 1px 0px inset;
+  }
+
+
+/*列表*/
+#inner-box {
+    margin: 5px;
+    border: 2px solid rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+/*背景*/
+#outer-box {
+    margin: 0px;
+    border: 3px solid rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+/*列表边框*/
+#scroll {
+    margin: 5px;
+    border: 2px solid rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+/*列表中的字体*/
+#text {
+    color: white;
+    margin: 5px;
+    border: 0px solid white;
+}
+
+/*图标*/
+#entry image {
+    padding-right: 3px;
+    /*border: 2px solid white;*/
+    background-color: transparent;
+}
+
+/*列表中第二种颜色，与window中的底色叠加*/
+*#entry:nth-child(even){
+    /*border: 1px solid rgba(15,21,70,0.8);*/
+    background-color: rgba(0,0,0,0.1);
+}
+
+/*选中的条目*/
+#entry:selected {
+    margin: 0px;
+    border-radius: 8px;
+    border: 1px solid white;
+    background-color: rgba(255,255,255,0.5);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* 增强文字阴影 */
+}
+
+/*选中条目的字体设置*/
+#text:selected {
+    margin: 5px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    /*border: 3px solid yellow;*/
+    /*background-color: blue;*/
+}
+/*选中条目的字体*/
+/*#entry:selected #text {*/
+    /*font-size: 22px;*/
+    /*font-weight: bold;*/
+    /*color: rgba(0,170,170,0.8);*/
+/*}*/
+
+
+    /*条目的子项目*/
+    #entry.activatable {
+        /*border: 2px solid yellow;*/
+        margin: 2px;
+        border-radius: 9px;
+        background-color: rgba(0,0,0,0.3);
+        /*border-bottom-width: 1px; */
+        /*border-bottom-color: white; */
+        /*border-bottom-style: solid; */
+        /*border-top-width: 1px; */
+        /*border-top-color: white; */
+        /*border-top-style: solid; */
+    }
+
+    /*子项目字体颜色*/
+    #entry.activatable #text {
+        color: rgba(255,255,255,1);
+        font-size: 14px;
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    /*子项目的选中项*/
+    #entry.activatable:selected {
+        border: 1px dashed rgba(255,255,255,1);
+        background-color: rgba(255,255,255,0.05);
+    }
+
+    /*子项目选中项的字体颜色*/
+    #entry.activatable:selected #text {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: bold;
+        color: rgba(255,255,255,1);
+    }
+
+    /*子项目的>展开符号*/
+    #entry arrow {
+        font-weight: normal;
+        color: rgba(255,255,255,0.5);
+    }
+    #entry arrow:hover {
+        font-weight: bold;
+        color: white;
+    }
+
+    /*子条目的背景*/
+    #expander-box {
+        margin: 2px;
+        border-radius: 9px;
+        border: 1px solid white;
+        background-color: rgba(26,30,36,0.01);
+    }

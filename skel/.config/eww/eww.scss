@@ -1,0 +1,83 @@
+window {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+.cpu-info-container {
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  min-width: 260px;
+  min-height: 120px;
+}
+.main-title-label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-left: 6px;
+}
+.cpu-model-label {
+  margin-bottom: 5px;
+  margin-left: 6px;
+}
+.separator-line {
+  background-color: #e64a19;
+  min-height: 1px;
+  margin-bottom: 10px;
+}
+.info-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.cpu-progress {
+  min-height: 10px;
+  margin-bottom: 10px;
+  margin-left: 6px;
+}
+.cpu-progress trough {
+  background-color: transparent;
+  min-height: 10px;
+  min-width: 150px;
+  padding: 0px;
+  border: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #ffffff;
+
+}
+.cpu-progress trough progress {
+  background-color: #4caf50;
+  border: none;
+}
+.temp-progress {
+  min-height: 10px;
+  margin-left: 6px;
+}
+.temp-progress trough {
+  background-color: transparent;
+  min-height: 10px;
+  min-width: 150px;
+  padding: 0px;
+  border: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #ffffff;
+}
+.normal trough progress {
+  background-color: #4caf50;
+  border: none;
+}
+.warning trough progress {
+  background-color: #f57c00;
+  border: none;
+}
+.critical trough progress {
+  background-color: #e64a19;
+}
+
+calendar {
+  background-color: transparent;
+  padding: 2px 10px 2px 10px;
+  font-weight: bold;
+  border: none;
+}

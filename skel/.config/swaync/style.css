@@ -1,0 +1,91 @@
+/* ----------------------------------------------------- */
+/* Global Settings & Reset */
+/* ----------------------------------------------------- */
+* {
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: normal;
+    color: #f5f5f5; /* 기본 텍스트 색상 (밝은 회색) */
+    background: none; /* 모든 배경색 제거 */
+    /* box-shadow: none; /* 그림자 제거 */ */
+}
+
+/* ----------------------------------------------------- */
+/* Main Windows (Notification Center & Notifications) */
+/* ----------------------------------------------------- */
+.notification-screen, .control-center {
+    background-color: transparent; 
+    margin: 10px;
+}
+
+/* ----------------------------------------------------- */
+/* Individual Notification Styling (불투명도 30% 적용) */
+/* ----------------------------------------------------- */
+.notification-row {
+    margin: 0px 0; 
+}
+
+.notification {
+    /* 불투명도 30% (0.3) 적용 */
+    background-color: rgba(30, 30, 30, 0.3); 
+    padding: 10px;
+    border-radius: 8px; 
+    border: 2px solid #4678b4; /* 2px 푸른색 테두리 유지 */
+    transition: background-color 0.3s ease;
+}
+
+.notification:hover {
+    background-color: rgba(45, 45, 45, 0.4); /* 호버 시 불투명도 40%로 살짝 진하게 */
+}
+
+/* 닫기 버튼 */
+.notification-close-button {
+    background: none;
+    color: #777777; 
+    border: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.notification-close-button:hover {
+    color: #ff6666; 
+}
+
+/* ----------------------------------------------------- */
+/* Text Styling */
+/* ----------------------------------------------------- */
+.notification-title {
+    color: #4678b4; /* 테두리와 동일한 색상 */
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.notification-body {
+    color: #f5f5f5; 
+    font-size: 13px;
+}
+
+/* ----------------------------------------------------- */
+/* Control Center Specifics (버튼은 불투명하게 유지) */
+/* ----------------------------------------------------- */
+.control-center-clear-button {
+    background-color: #0056b3; 
+    color: #ffffff; 
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-weight: bold;
+    margin-top: 10px;
+    border: none;
+}
+
+/* 볼륨/밝기 슬라이더 (Progress bar) */
+.progress {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+.progress-bar {
+    background-color: #4678b4; /* 테두리와 동일한 색상 */
+    border-radius: 5px;
+}

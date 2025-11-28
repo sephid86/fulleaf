@@ -1,0 +1,68 @@
+(defpoll disk-model :interval "24h"
+  `~/.config/eww/scripts/disk_model.sh`) 
+
+(defwidget disk_usage_box []
+  (box :orientation "v"
+       :halign "start" 
+       :space-evenly false
+       
+    ;; EWW_DISK["/"].를 사용하여 루트 파티션 정보를 참조합니다.
+    
+    (label :text "Used: ${round(EWW_DISK["/"].used / 1073741824, 1)} GiB"
+           :class "info-label"
+           :halign "start") 
+
+    (progress :class "cpu-progress"
+              :orientation "h"
+              :value "${EWW_DISK["/"].used_perc}"
+              :width 150 
+              :height 10       
+              :halign "start"
+              )
+
+    (label :text "Free: ${round(EWW_DISK["/"].free / 1073741824, 1)} GiB"
+           :class "info-label"
+           :halign "start")
+           
+    (label :text "Total: ${round(EWW_DISK["/"].total / 1073741824, 1)} GiB"
+           :class "info-label"
+           :halign "start")
+  )
+)
+
+(defwidget disk_info_widget []
+  (box :class "cpu-info-container" ;; 기존 CPU/GPU와 동일한 스타일 재사용
+       :orientation "v"
+       :halign "start"
+       :space-evenly false
+
+    (label :text "Disk" 
+           :class "main-title-label" 
+           :halign "start")
+
+    (box :class "separator-line"
+         :height 2
+         :halign "fill")
+
+    (label :text "${disk-model}" ;; 모델명 표시
+           :class "cpu-model-label" 
+           :halign "start"
+           :wrap true)
+
+    (disk_usage_box)
+  )
+)
+
+;; 최종 DISK 윈도우 정의
+(defwindow disk-desktop-widget
+  :geometry (geometry :x "320px" ;; 위치 조정 필요
+                      :y "562px"
+                      ;; :y "264px"
+                      :anchor "top left" ;; 위치 조정 필요
+                      )
+  :stacking "bg"
+  :monitor 0
+  :window-type "desktop"
+  :wm-ignore false
+  (disk_info_widget)
+)

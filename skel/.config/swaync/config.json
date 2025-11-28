@@ -1,0 +1,14 @@
+{
+  "positionX": "right",
+  "positionY": "top",
+  "control-center-positionX": "right",
+  "control-center-positionY": "top",
+  "control-center-width": 400,
+  "control-center-height": 600,
+  "notification-icon-size": 48,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 200,
+  "timeout": 5, // 알림이 사라지는 시간 (초)
+  "transient": true,
+  "css-file": "~/.config/swaync/style.css"
+}

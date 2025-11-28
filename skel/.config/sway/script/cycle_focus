@@ -1,0 +1,47 @@
+
+#!/bin/bash
+
+# 현재 포커스된 창의 ID 가져오기
+focused_id=$(swaymsg -t get_tree | jq -r '
+    recurse(.nodes[], .floating_nodes[]) | 
+    select(.focused) | 
+    .id
+')
+
+# 현재 작업 공간에 있는 모든 창의 ID 목록 가져오기
+# visible(true)를 사용하여 현재 보이는(활성화된) 작업 공간의 창만 가져옵니다.
+window_ids=$(swaymsg -t get_tree | jq -r '
+    recurse(.nodes[], .floating_nodes[]) | 
+    select(.type == "workspace" and .visible == true) | 
+    recurse(.nodes[], .floating_nodes[]) | 
+    select(.type == "con") | 
+    .id
+')
+
+# 창 ID들을 배열로 저장
+mapfile -t id_array <<< "$window_ids"
+
+# 현재 포커스된 창의 인덱스 찾기
+current_index=-1
+for i in "${!id_array[@]}"; do
+    if [[ "${id_array[i]}" == "$focused_id" ]]; then
+        current_index=$i
+        break
+    fi
+done
+
+# 다음 창의 인덱스 계산 (마지막 창이면 처음으로 돌아감)
+next_index=$(( (current_index + 1) % ${#id_array[@]} ))
+
+next_id=${id_array[next_index]}
+
+if [[ -n "$next_id" ]]; then
+    # 현재 창의 전체 화면 모드를 해제 (혹시 모를 경우 대비)
+    swaymsg "[con_id=$focused_id] fullscreen disable"
+    
+    # 다음 창으로 포커스 이동
+    swaymsg "[con_id=$next_id] focus"
+    
+    # 다음 창을 전체 화면으로 설정
+    swaymsg "[con_id=$next_id] fullscreen enable"
+fi

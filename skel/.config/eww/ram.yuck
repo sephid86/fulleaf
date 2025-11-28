@@ -1,0 +1,69 @@
+;; 메모리 제조사/모델명은 Magic Variable에 없으므로 스크립트 사용
+;;(defpoll ram-model :interval "24h"
+
+;; RAM 사용률 정보를 표시하는 내부 위젯 (세로 방향)
+(defwidget ram_usage_box []
+  (box :orientation "v"
+       :halign "start" 
+       :space-evenly false
+    
+    (label :text "Used: ${round(EWW_RAM.used_mem / 1073741824, 1)} GiB (${round(EWW_RAM.used_mem_perc,0)}%)" ;; Used 메모리
+           :class "info-label"
+           :halign "start") 
+
+    (progress :class "cpu-progress" ;; cpu-progress 클래스 재사용
+              :orientation "h"
+              :value "${EWW_RAM.used_mem_perc}" ;; 사용률(%)
+              :width 150 
+              :height 10       
+              :halign "start"
+              )
+
+    (label :text "Free: ${round(EWW_RAM.available_mem / 1073741824, 1)} GiB" ;; Free 메모리
+           :class "info-label"
+           :halign "start")
+           
+    (label :text "Total: ${round(EWW_RAM.total_mem / 1073741824, 1)} GiB" ;; Total 메모리
+           :class "info-label"
+           :halign "start")
+  )
+)
+
+
+;; 전체 RAM 정보 통합 위젯
+(defwidget ram_info_widget []
+  (box :class "cpu-info-container" ;; 기존 CPU/GPU와 동일한 스타일 재사용
+       :orientation "v"
+       :halign "start"
+       :space-evenly false
+
+    (label :text "RAM" 
+           :class "main-title-label" 
+           :halign "start")
+
+    (box :class "separator-line"
+         :height 2
+         :halign "fill")
+
+    ;; (label :text "${ram-model}" ;; 모델명 표시
+    ;;        :class "cpu-model-label" 
+    ;;        :halign "start"
+    ;;        :wrap true)
+
+    (ram_usage_box)
+  )
+)
+
+;; 최종 RAM 윈도우 정의
+(defwindow ram-desktop-widget
+  :geometry (geometry :x "320px" ;; 위치 조정 필요
+                      :y "410px"
+                      ;; :y "264px"
+                      :anchor "top left" ;; 위치 조정 필요
+                      )
+  :stacking "bg"
+  :monitor 0
+  :window-type "desktop"
+  :wm-ignore false
+  (ram_info_widget)
+)

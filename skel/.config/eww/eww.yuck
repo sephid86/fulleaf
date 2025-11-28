@@ -1,0 +1,6 @@
+(include "./cpu.yuck")
+(include "./gpu.yuck")
+(include "./ram.yuck")
+(include "./disk.yuck")
+(include "./calendar.yuck")
+

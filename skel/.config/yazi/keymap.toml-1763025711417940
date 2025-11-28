@@ -1,0 +1,4 @@
+# 예시: F1 키를 눌러 udisksctl로 마운트 가능한 장치 목록을 띄우고 선택
+[[manager.keymap]]
+on = [ "<C-m>" ]
+run = "call --shell 'udisksctl mount -b $(udisksctl status | grep -oP \"/dev/sd[a-z][0-9]\")'"

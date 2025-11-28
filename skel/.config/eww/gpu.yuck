@@ -1,0 +1,65 @@
+(deflisten gpu-temp :interval "1s"
+  `~/.config/eww/scripts/gpu_temp.sh`)
+
+(defpoll gpu-model :interval "24h"
+  `~/.config/eww/scripts/gpu_model.sh`) 
+  ;; 또는 명령어 직접 입력: `nvidia-smi --query-gpu=name --format=csv,noheader`
+
+;; GPU 온도 정보를 표시하는 내부 위젯
+(defwidget gpu_temp_box []
+  (box :orientation "v"
+       :halign "start"
+       :space-evenly false
+
+    (label :text "Temp: ${gpu-temp}°C"
+           :class "info-label"
+           :halign "start")
+
+    (progress :class "temp-progress ${gpu-temp >= 80 ? 'critical' : gpu-temp >= 60 ? 'warning' : 'normal'}" 
+              :orientation "h"
+              :value gpu-temp
+              :width 150
+              :height 10
+              :halign "start")
+  )
+)
+
+;; 전체 GPU 정보 통합 위젯
+(defwidget gpu_info_widget []
+  (box :class "cpu-info-container" ;; CPU와 동일한 SCSS 클래스 재사용
+       :orientation "v"
+       :halign "start"
+       :space-evenly false
+
+    (label :text "GPU" 
+           :class "main-title-label" 
+           :halign "start")
+
+    (box :class "separator-line"
+         :height 2
+         :halign "fill")
+
+    (label :text "${gpu-model}" 
+           :class "cpu-model-label" ;; CPU와 동일한 SCSS 클래스 재사용
+           :halign "start"
+           :wrap true
+           )
+
+    ;; GPU 사용률은 EWW Magic Variable이 없으므로 온도만 표시
+    (gpu_temp_box)  
+  )
+)
+
+;; 최종 GPU 윈도우 정의
+(defwindow gpu-desktop-widget
+  :geometry (geometry :x "320px"
+                      :y "264px"
+                      ;; :y "416px"
+                      :anchor "top left"
+                      )
+  :stacking "bg"
+  :monitor 0
+  :window-type "desktop"
+  :wm-ignore false
+  (gpu_info_widget)
+)

@@ -1,0 +1,87 @@
+;; (deflisten cpu-usage :interval "1s"
+;;   `~/.config/eww/scripts/cpu_usage.sh`)
+
+(deflisten cpu-temp :interval "1s"
+  `~/.config/eww/scripts/cpu_temp.sh`)
+
+(defpoll cpu-model :interval "24h"
+  `grep -m 1 'model name' /proc/cpuinfo | cut -d: -f2 | sed 's/^[ \t]*//'`)
+
+;; 사용률 정보를 표시하는 내부 위젯 (세로 방향)
+(defwidget usage_box []
+  (box :orientation "v" ;; 방향을 수직(Vertical)으로 변경
+       :halign "start" 
+       :space-evenly false
+    
+    ;; (label :text "Usage: ${cpu-usage}%" 
+    (label :text "Usage: ${round(EWW_CPU.avg,0)}%" 
+           :class "info-label"
+           :halign "start") ;; 라벨 왼쪽 정렬
+
+    (progress :class "cpu-progress"
+              :orientation "h"
+              ;; :value cpu-usage
+              :value "${EWW_CPU.avg}"
+              :width 150       ;; 너비를 더 넓게 조정
+              :height 10       
+              :halign "start"
+              ) ;; 프로그레스 바 왼쪽 정렬
+  )
+)
+
+;; 온도 정보를 표시하는 내부 위젯 (세로 방향)
+(defwidget temp_box []
+  (box :orientation "v" ;; 방향을 수직(Vertical)으로 변경
+       :halign "start"
+       :space-evenly false
+
+    (label :text "Temp: ${cpu-temp}°C"
+    ;;(label :text "Temp: ${EWW_TEMPS}°C"
+           :class "info-label"
+           :halign "start") ;; 라벨 왼쪽 정렬
+
+    (progress :class "temp-progress ${cpu-temp >= 80 ? 'critical' : cpu-temp >= 60 ? 'warning' : 'normal'}" 
+              :orientation "h"
+              :value cpu-temp
+              :width 150 ;; 너비를 더 넓게 조정
+              :height 10
+              :halign "start") ;; 프로그레스 바 왼쪽 정렬
+  )
+)
+
+;; 전체 CPU 정보 통합 위젯 (세로 방향 배치 및 제목 포함)
+(defwidget cpu_info_widget []
+  (box :class "cpu-info-container" 
+       :orientation "v" ;; 메인 컨테이너도 세로 방향
+       :halign "start"
+       :space-evenly false
+
+    (label :text "CPU" 
+           :class "main-title-label" 
+           :halign "start") ;; 제목 중앙 정렬
+
+    (box :class "separator-line"
+         :height 2
+         :halign "fill")
+
+    (label :text "${cpu-model}" 
+           :class "cpu-model-label"
+           :halign "start")
+
+    (usage_box) ;; 사용률 박스 (아래로 쌓임)
+    (temp_box)  ;; 온도 박스 (그 아래에 쌓임)
+  )
+)
+
+;; 최종 윈도우 정의
+(defwindow cpu-desktop-widget
+  :geometry (geometry :x "320px"
+                      :y "100px"
+                      :anchor "top left"
+                      )
+  :stacking "bg"
+  :monitor 0
+  :window-type "desktop"
+  :wm-ignore false
+  (cpu_info_widget)
+)

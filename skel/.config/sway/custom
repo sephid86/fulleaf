@@ -29,6 +29,11 @@ gaps inner 8
 
 #- 외부디스플레이 토글키
 bindsym $mod+Ctrl+grave output $dp2 toggle
+bindsym $mod+Ctrl+l exec ~/.config/sway/script/worknext next
+bindsym $mod+Ctrl+h exec ~/.config/sway/script/worknext prev
+
+bindsym $mod+Alt+l exec ~/.config/sway/script/worknext window next
+bindsym $mod+Alt+h exec ~/.config/sway/script/worknext window prev
 
 ##--- 윈도우 테두리 컬러 설정.
 set $focus_border_color "#77a5e7"
@@ -83,6 +88,9 @@ bindsym $mod+Shift+n exec swaync-client -t -sw
 #- 기본 오디오 장치 선택 단축키
 bindsym $mod+m exec pactl set-default-sink $(pactl list short sinks |awk '{print $2}' |wofi $rofi_args --dmenu)
 
+# bindsym $mod+Tab exec ~/.config/sway/script/cycle_focus
+bindsym $mod+Tab fullscreen disable, focus next, fullscreen enable
+
 ##--- 시작프로그램 설정.
 # exec "kime -k;sleep 1;kime"
 exec --no-startup-id fcitx5 -d
@@ -90,7 +98,7 @@ exec --no-startup-id fcitx5 -d
 #exec "ibus engine hangul"
 #exec --no-startup-id '/usr/bin/gnome-keyring-daemon --foreground --components="pkcs11,secrets,ssh" --control-directory=%t/keyring'
 exec "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-exec "easyeffects --gapplication-service"
+# exec "easyeffects --gapplication-service"
 exec swaync
 #exec mako
 
@@ -142,13 +150,14 @@ for_window [app_id="libreoffice-calc"] floating disable
 for_window [title="Mozilla Firefox"] floating disable
 for_window [class="firefox" instance="Navigator"] floating disable
 for_window [title="Chromium"] floating disable
+for_window [app_id="google-chrome"] floating disable
 
 #- 영상재생중 절전모드 또는 스크린세이버 중지.
-for_window [app_id="firefox"] inhibit_idle fullscreen
-for_window [class="firefox"] inhibit_idle fullscreen
-for_window [app_id="google-chrome"] inhibit_idle fullscreen
-for_window [class="Google-chrome"] inhibit_idle fullscreen
-for_window [title="Chromium"] inhibit_idle fullscreen
+# for_window [app_id="firefox"] inhibit_idle fullscreen
+# for_window [class="firefox"] inhibit_idle fullscreen
+# for_window [app_id="google-chrome"] inhibit_idle fullscreen
+# for_window [class="Google-chrome"] inhibit_idle fullscreen
+# for_window [title="Chromium"] inhibit_idle fullscreen
 #for_window [app_id="mpv"] inhibit_idle visible
 
 ##--- 기타 메모
