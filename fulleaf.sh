@@ -86,10 +86,10 @@ INSTALL_SWAY="false"
 tmode="false"
 
 
-ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,tmode,storage:,storage_mode:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@")
+ARGS=$(getopt -o "" --long userid:,userpw:,rootpw:,tmode,storage:,storage_mode:,gnome,hypr,sway,help --name "$(basename "$0")" -- "$@") || true
 
 if [ $? -ne 0 ]; then
-  usage
+  usage >&2
 fi
 
 eval set -- "$ARGS"
@@ -157,8 +157,8 @@ if [ "$tmode" == "true" ]; then
 fi
 
 if [[ -z "$USER_ID" || -z "$USER_PW" || -z "$ROOT_PW" ]]; then
-  echo "Error: userid, userpw, rootpw are required options." >&2
-  usage
+  echo "Error: userid, userpw, rootpw are required options."
+  usage >&2
 fi
 
 echo "-----------------------------------------"
