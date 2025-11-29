@@ -27,7 +27,7 @@ usage() {
   echo " "
   echo "--storage_mode 0 : creating new partitions and formatting storage."
   echo "                  All data on the storage will be deleted."
-  echo "--storage_mode 1 : Keep /boot and other partitions."
+  echo "--storage_mode 1 : Keep /boot and other partitions. (not yet support this mode.)"
   echo "                  Format only the root (/) partition."
   exit 1
 }
@@ -219,6 +219,9 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     mount "$boot_efi_partition" "/mnt/boot"
 
   elif [[ "$storage_mode" -eq 1 ]]; then
+    echo "this mode is support not yet."
+    usage >&2
+    exit 1
     echo "Mode 1 : Keep /boot and other partitions."
     echo "Mode 1 : Format only the root (/) partition."
     PART_DEV_BOOT=$(lsblk "$storage" -o PATH,FSTYPE --noheadings | grep -E 'vfat' | awk '{print $1}' | head -n 1)
