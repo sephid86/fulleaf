@@ -415,7 +415,7 @@ title   Fulleaf Linux
 linux   /vmlinuz-linux
 initrd  /$cpu_vendor-ucode.img
 initrd  /initramfs-linux.img
-options root=UUID=$ROOT_UUID rw quiet splash
+options root=UUID=$ROOT_UUID rootflags=subvol=@ rw quiet splash
 EOF
 
 echo "find Microsoft Windows EFI ..."
