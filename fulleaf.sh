@@ -503,17 +503,7 @@ if [ "$INSTALL_HYPR" == "true" ]; then
   if [[ "$INSTALL_GNOME" != "true" || "$INSTALL_SWAY" != "true" ]]; then
     pac greetd greetd-regreet cage
     sed -i 's|^command[[:space:]]*=.*|command = "cage regreet"|g' /mnt/etc/greetd/config.toml
-
-# echo "[terminal]
-# vt = 1
-#
-# [default_session]
-# # 'cage' 안에서 'regreet'를 실행하도록 설정
-# command = "cage -s -- regreet" 
-# user = "greeter" 
-# " > /etc/greetd/regreet.toml
-
-# arch-chroot /mnt systemctl enable regreet
+    arch-chroot /mnt systemctl enable greetd
   fi
 fi
 #sway -
