@@ -307,69 +307,6 @@ if [ -z "$storage" ]; then
 fi
 
 #2-pacstrap
-pacstrap /mnt $(cat fulleaf-pacstrap)
-genfstab -U /mnt >> /mnt/etc/fstab
-
-#3-env
-cp /etc/os-release /mnt/etc/os-release
-arch-chroot /mnt ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
-echo ko_KR.EUC-KR EUC-KR > /mnt/etc/locale.gen
-echo ko_KR.UTF-8 UTF-8 >> /mnt/etc/locale.gen
-echo en_US.UTF-8 UTF-8 >> /mnt/etc/locale.gen 
-arch-chroot /mnt locale-gen
-echo LANG=ko_KR.UTF-8 > /mnt/etc/locale.conf
-echo fulleaf > /mnt/etc/hostname
-echo "MAKEFLAGS='-j$(nproc)'" >> /mnt/etc/makepkg.conf
-sed -i 's/#Color/Color/g' /mnt/etc/pacman.conf
-echo [multilib] >> /mnt/etc/pacman.conf
-echo "Include = /etc/pacman.d/mirrorlist" >> /mnt/etc/pacman.conf
-# cp /etc/DIR_COLORS /mnt/etc
-# cp /etc/bash.bashrc /mnt/etc
-cp -rf skel /mnt/etc/
-cp -rf skel/.config /mnt/root/
-cp -rf root/.bashrc /mnt/root/
-arch-chroot /mnt sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
-
-# arch-chroot /mnt su - %s -c 'ln --symbolic /usr/share/icons/Vimix-white-cursors ~/.local/share/icons/default'
-# arch-chroot /mnt ln --symbolic /usr/share/icons/Vimix-white-cursors /etc/skel/.local/share/icons/default
-sed -i '/^HOOKS=/s/udev /udev plymouth /' /mnt/etc/mkinitcpio.conf
-
-# mirrorlist
-# Server = ftp.harukasan.org
-# Server = mirror.funman.xyz
-# Server = mirror.premi.st
-
-add_env EDITOR nvim
-add_env VISUAL nvim
-add_env ELECTRON_ENABLE_WAYLAND 1
-add_env ELECTRON_OZONE_PLATFORM_HINT wayland
-add_env GDK_BACKEND wayland
-add_env QT_QPA_PLATFORM "wayland;xcb"
-add_env CHROME_FLAGS "--enable-features=vulkan --use-angle=vulkan"
-add_env MOZ_ENABLE_WAYLAND 1
-
-add_env XCURSOR_THEME Vimix-white-cursors
-add_env XCURSOR_SIZE 24
-
-gtk_settings="[Settings]
-gtk-theme-name=Adwaita-dark
-gtk-icon-theme-name=Adwaita
-gtk-cursor-theme-name=Vimix-white-cursors
-gtk-cursor-theme-size=24"
-
-mkdir -p "/mnt/etc/skel/.config/gtk-3.0"
-mkdir -p "/mnt/etc/skel/.config/gtk-4.0"
-echo "$gtk_settings" > "/mnt/etc/skel/.config/gtk-3.0/settings.ini"
-echo "$gtk_settings" > "/mnt/etc/skel/.config/gtk-4.0/settings.ini"
-
-#4-user
-echo root:$ROOT_PW | arch-chroot /mnt chpasswd
-arch-chroot /mnt useradd -m -g users -G wheel -s /bin/bash $USER_ID
-echo $USER_ID:$USER_PW | arch-chroot /mnt chpasswd
-arch-chroot /mnt su - $USER_ID -c 'git config --global core.editor nvim'
-
-#5-Boot loader
-
 CPUINFO=$(grep "vendor_id" /proc/cpuinfo | head -n 1 | awk '{print $3}')
 cpu_vendor=""
 
@@ -378,16 +315,18 @@ if grep -iq "amd" <<< "$CPUINFO"; then
 elif grep -iq "intel" <<< "$CPUINFO"; then
   cpu_vendor="intel"
 else
-  cpu_vendor="unknown"
+  cpu_vendor=""
+  echo "Error : CPU Vendor not found. only AMD or Intel are supported." >&2
+  exit 1
 fi
 
 arch-chroot /mnt pacman -Syu
 echo "CPU Vendor: $cpu_vendor"
-if [[ "$cpu_vendor" == "intel" || "$cpu_vendor" == "amd" ]]; then
-  arch-chroot /mnt pacman -Sy --noconfirm $cpu_vendor-ucode
-  # echo "KEYMAP=us" >> /mnt/etc/vconsole.conf # 가상환경에서 mkinitcpio 에러 방지.
-  arch-chroot /mnt mkinitcpio -P || true
-fi
+pacstrap /mnt $(cat fulleaf-pacstrap) ${cpu_vendor:+"$cpu_vendor-ucode"}
+genfstab -U /mnt >> /mnt/etc/fstab
+
+#3-Boot loader
+
 
 #systemdboot
 ENTRIES_DIR="$BOOT_MNT/loader/entries"
@@ -413,7 +352,7 @@ ROOT_UUID=$(arch-chroot "$ROOT_MNT" findmnt / -no UUID)
 cat <<EOF > "$ENTRIES_DIR/Fulleaf.conf"
 title   Fulleaf Linux
 linux   /vmlinuz-linux
-initrd  /$cpu_vendor-ucode.img
+initrd  /$cpu_vendor.img
 initrd  /initramfs-linux.img
 options root=UUID=$ROOT_UUID rootflags=subvol=@ rw quiet splash plymouth.use-simpledrm
 EOF
@@ -458,7 +397,67 @@ COUNT=$((COUNT + 1))
 done <<< "$VEC_PARTITIONS"
 rmdir "$TEMP_MNT"
 
-#7-GUI install
+
+#4-env
+cp /etc/os-release /mnt/etc/os-release
+arch-chroot /mnt ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+echo ko_KR.EUC-KR EUC-KR > /mnt/etc/locale.gen
+echo ko_KR.UTF-8 UTF-8 >> /mnt/etc/locale.gen
+echo en_US.UTF-8 UTF-8 >> /mnt/etc/locale.gen 
+arch-chroot /mnt locale-gen
+echo LANG=ko_KR.UTF-8 > /mnt/etc/locale.conf
+echo fulleaf > /mnt/etc/hostname
+echo "MAKEFLAGS='-j$(nproc)'" >> /mnt/etc/makepkg.conf
+sed -i 's/#Color/Color/g' /mnt/etc/pacman.conf
+echo [multilib] >> /mnt/etc/pacman.conf
+echo "Include = /etc/pacman.d/mirrorlist" >> /mnt/etc/pacman.conf
+# cp /etc/DIR_COLORS /mnt/etc
+# cp /etc/bash.bashrc /mnt/etc
+cp -rf skel /mnt/etc/
+cp -rf skel/.config /mnt/root/
+cp -rf root/.bashrc /mnt/root/
+arch-chroot /mnt sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
+
+# arch-chroot /mnt su - %s -c 'ln --symbolic /usr/share/icons/Vimix-white-cursors ~/.local/share/icons/default'
+# arch-chroot /mnt ln --symbolic /usr/share/icons/Vimix-white-cursors /etc/skel/.local/share/icons/default
+# sed -i '/^HOOKS=/s/udev /udev plymouth /' /mnt/etc/mkinitcpio.conf
+sed -i '/^HOOKS=/s/)$/ plymouth)/' /mnt/etc/mkinitcpio.conf
+
+# mirrorlist
+# Server = ftp.harukasan.org
+# Server = mirror.funman.xyz
+# Server = mirror.premi.st
+
+add_env EDITOR nvim
+add_env VISUAL nvim
+add_env ELECTRON_ENABLE_WAYLAND 1
+add_env ELECTRON_OZONE_PLATFORM_HINT wayland
+add_env GDK_BACKEND wayland
+add_env QT_QPA_PLATFORM "wayland;xcb"
+add_env CHROME_FLAGS "--enable-features=vulkan --use-angle=vulkan"
+add_env MOZ_ENABLE_WAYLAND 1
+
+add_env XCURSOR_THEME Vimix-white-cursors
+add_env XCURSOR_SIZE 24
+
+gtk_settings="[Settings]
+gtk-theme-name=Adwaita-dark
+gtk-icon-theme-name=Adwaita
+gtk-cursor-theme-name=Vimix-white-cursors
+gtk-cursor-theme-size=24"
+
+mkdir -p "/mnt/etc/skel/.config/gtk-3.0"
+mkdir -p "/mnt/etc/skel/.config/gtk-4.0"
+echo "$gtk_settings" > "/mnt/etc/skel/.config/gtk-3.0/settings.ini"
+echo "$gtk_settings" > "/mnt/etc/skel/.config/gtk-4.0/settings.ini"
+
+#5-user
+echo root:$ROOT_PW | arch-chroot /mnt chpasswd
+arch-chroot /mnt useradd -m -g users -G wheel -s /bin/bash $USER_ID
+echo $USER_ID:$USER_PW | arch-chroot /mnt chpasswd
+arch-chroot /mnt su - $USER_ID -c 'git config --global core.editor nvim'
+
+#6-GUI install
 
 # 다크 모드 설정
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
@@ -503,6 +502,7 @@ if [ "$INSTALL_HYPR" == "true" ]; then
   #gnome 설치가 아니면 regreet 설치
   if [[ "$INSTALL_GNOME" != "true" || "$INSTALL_SWAY" != "true" ]]; then
     pac greetd greetd-regreet cage
+    sed -i 's|^command[[:space:]]*=.*|command = "cage regreet"|g' /mnt/etc/greetd/config.toml
 
 # echo "[terminal]
 # vt = 1
@@ -532,7 +532,7 @@ if [ "$INSTALL_SWAY" == "true" ]; then
   # fi
 fi
 
-#8-systemd
+#7-systemd
 arch-chroot /mnt systemctl enable NetworkManager
 arch-chroot /mnt systemctl enable plymouth-start || true
 
