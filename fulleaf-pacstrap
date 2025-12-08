@@ -2,6 +2,7 @@ linux
 linux-firmware
 base
 base-devel
+jq
 plymouth
 neovim
 git
