@@ -10,10 +10,10 @@ opacity = 0.7
 
 [general]
 # mocha (기본 어두운 테마): 
-import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]
+# import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]
 
 # macchiato (약간 밝은 어두운 테마):
-# import = ["~/.config/alacritty/themes/catppuccin-macchiato.toml"]
+import = ["~/.config/alacritty/themes/catppuccin-macchiato.toml"]
 
 # frappe (밝은 테마):
 # import = ["~/.config/alacritty/themes/catppuccin-frappe.toml"]
