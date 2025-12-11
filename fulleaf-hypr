@@ -1,6 +1,7 @@
 hyprland
 wayland
 wayland-protocols
+egl-wayland
 xdg-desktop-portal-hyprland
 xdg-desktop-portal-gtk
 xdg-user-dirs
@@ -41,4 +42,3 @@ fcitx5-hangul
 fcitx5-gtk
 fcitx5-qt
 fcitx5-configtool
-ueberzugpp
