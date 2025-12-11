@@ -1,14 +1,41 @@
-import = [
-"~/.config/alacritty/monokai-sephid86.toml"
-#"~/.config/alacritty/midnight-haze.toml"
-]
-
 [font]
-size = 12
-
-[font.normal]
-family = "monospace"
+normal.family = "monospace"
+normal.style = "Regular"
+size = 14.0
 
 [window]
 opacity = 0.7
 
+# ~/.config/alacritty/alacritty.toml
+
+[general]
+# mocha (기본 어두운 테마): 
+import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]
+
+# macchiato (약간 밝은 어두운 테마):
+# import = ["~/.config/alacritty/themes/catppuccin-macchiato.toml"]
+
+# frappe (밝은 테마):
+# import = ["~/.config/alacritty/themes/catppuccin-frappe.toml"]
+
+# latte (가장 밝은 테마):
+# import = ["~/.config/alacritty/themes/catppuccin-latte.toml"]
+# [colors]
+[colors.primary]
+background = "#000000" # 원하는 배경색의 16진수 코드 입력 (예: 어두운 회색)
+# foreground = "#D4D4D4" # 원하는 글자색의 16진수 코드 입력
+
+# [colors.cursor]
+# text = "#1E1E1E"
+# cursor = "#D4D4D4"
+
+# [[keyboard.bindings]]
+# key = "Copy"
+# mods = "None"
+# action = "Copy"
+#
+# [[keyboard.bindings]]
+# key = "Paste"
+# mods = "None"
+# action = "Paste"
+#
