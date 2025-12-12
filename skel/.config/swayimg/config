@@ -120,7 +120,7 @@ reverse = no
 # Read directories recursively (yes/no)
 recursive = no
 # Add files from the same directory as the first file (yes/no)
-all = no
+all = yes
 # Enable file system monitoring for adding new images to the list (yes/no)
 fsmon = yes
 
@@ -157,7 +157,7 @@ status_timeout = 3
 top_left = +name,+format,+filesize,+imagesize,+exif
 top_right = index
 bottom_left = scale,frame
-bottom_right = status
+bottom_right = status,dir
 
 # Display scheme for slideshow mode (position = content)
 [info.slideshow]
@@ -188,7 +188,7 @@ Shift+d = prev_dir
 d = next_dir
 Shift+o = prev_frame
 o = next_frame
-; c = skip_file
+c = skip_file
 s = mode slideshow
 n = animation
 f = fullscreen
@@ -224,8 +224,6 @@ ScrollLeft = step_right 5
 ScrollRight = step_left 5
 ScrollUp = prev_file
 ScrollDown = next_file
-Button4 = prev_file
-Button5 = next_file
 Ctrl+ScrollUp = zoom +10 mouse
 Ctrl+ScrollDown = zoom -10 mouse
 Shift+ScrollUp = prev_file
@@ -235,6 +233,9 @@ Alt+ScrollDown = next_frame
 MouseLeft = drag
 MouseSide = prev_file
 MouseExtra = next_file
+
+l = next_file
+h = prev_file
 
 ################################################################################
 # Slideshow mode key binding configuration: key = action [parameters]
@@ -289,3 +290,8 @@ ScrollDown = step_down
 Ctrl+ScrollUp = thumb +20
 Ctrl+ScrollDown = thumb -20
 MouseLeft = mode viewer
+
+h = step_left
+l = step_right
+k = step_up
+j = step_down
