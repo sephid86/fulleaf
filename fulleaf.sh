@@ -213,11 +213,6 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     mkdir -p /mnt
     mount $btrfs_root_partition /mnt
     btrfs subvolume create "/mnt/@root"
-echo "--> Unmounting /mnt."
-umount /mnt
-
-echo "--> Mounting @root subvolume to /mnt."
-mount -o subvol=@root "$btrfs_root_partition" /mnt
 
     echo "--> EFI Partition mount. : /mnt/boot mount."
     mkdir -p /mnt/boot
@@ -325,7 +320,7 @@ else
   exit 1
 fi
 
-arch-chroot /mnt pacman -Syu
+pacman -Syu
 echo "CPU Vendor: $cpu_vendor"
 pacstrap /mnt $(cat fulleaf-pacstrap) ${cpu_vendor:+"$cpu_vendor-ucode"}
 genfstab -U /mnt >> /mnt/etc/fstab
