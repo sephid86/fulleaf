@@ -214,6 +214,14 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     mount $btrfs_root_partition /mnt
     btrfs subvolume create "/mnt/@root"
 
+# 3. 최상위 파티션 언마운트 (매우 중요)
+echo "--> Unmounting /mnt."
+umount /mnt
+
+# 4. @root 서브볼륨을 /mnt에 다시 마운트 (실제 OS 설치 위치)
+echo "--> Mounting @root subvolume to /mnt."
+mount -o subvol=@root "$btrfs_root_partition" /mnt
+
     echo "--> EFI Partition mount. : /mnt/boot mount."
     mkdir -p /mnt/boot
     mount "$boot_efi_partition" "/mnt/boot"
