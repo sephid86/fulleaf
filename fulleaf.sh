@@ -431,6 +431,19 @@ arch-chroot /mnt sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g
 # sed -i '/^HOOKS=/s/udev /udev plymouth /' /mnt/etc/mkinitcpio.conf
 sed -i '/^HOOKS=/s/)$/ plymouth)/' /mnt/etc/mkinitcpio.conf
 
+cat <<EOF > "/mnt/etc/pacman.d/mirrorlist"
+## South Korea
+Server = https://kr.mirrors.cicku.me/\$repo/os/\$arch
+Server = https://mirror.techlabs.co.kr/\$repo/os/\$arch
+Server = https://mirror.distly.kr/\$repo/os/\$arch
+Server = https://ftp.hrts.kr/\$repo/os/\$arch
+Server = https://mirror.keiminem.com/\$repo/os/\$arch
+Server = https://mirror2.keiminem.com/\$repo/os/\$arch
+Server = https://mirror.krfoss.org/\$repo/os/\$arch
+Server = https://ftp.lanet.kr/\$repo/os/\$arch
+Server = https://mirror.siwoo.org/\$repo/os/\$arch
+EOF
+
 # mirrorlist
 # Server = ftp.harukasan.org
 # Server = mirror.funman.xyz
@@ -442,7 +455,7 @@ add_env ELECTRON_ENABLE_WAYLAND 1
 add_env ELECTRON_OZONE_PLATFORM_HINT wayland
 add_env GDK_BACKEND wayland
 add_env QT_QPA_PLATFORM "wayland;xcb"
-add_env SDL_VIDEODRIVER "wayland"
+# add_env SDL_VIDEODRIVER "wayland"
 add_env CHROME_FLAGS "--enable-features=vulkan --use-angle=vulkan"
 add_env MOZ_ENABLE_WAYLAND 1
 
