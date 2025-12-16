@@ -213,6 +213,11 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     mkdir -p /mnt
     mount $btrfs_root_partition /mnt
     btrfs subvolume create "/mnt/@root"
+echo "--> Unmounting /mnt."
+umount /mnt
+
+echo "--> Mounting @root subvolume to /mnt."
+mount -o subvol=@root "$btrfs_root_partition" /mnt
 
     echo "--> EFI Partition mount. : /mnt/boot mount."
     mkdir -p /mnt/boot
