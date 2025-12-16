@@ -434,6 +434,7 @@ add_env ELECTRON_ENABLE_WAYLAND 1
 add_env ELECTRON_OZONE_PLATFORM_HINT wayland
 add_env GDK_BACKEND wayland
 add_env QT_QPA_PLATFORM "wayland;xcb"
+add_env SDL_VIDEODRIVER "wayland"
 add_env CHROME_FLAGS "--enable-features=vulkan --use-angle=vulkan"
 add_env MOZ_ENABLE_WAYLAND 1
 
