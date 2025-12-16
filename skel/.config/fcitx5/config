@@ -1,0 +1,81 @@
+[Hotkey]
+# Enumerate when holding modifier of Toggle key
+EnumerateWithTriggerKeys=True
+# 입력기 전환
+EnumerateForwardKeys=
+# 입력기 역순으로 전환
+EnumerateBackwardKeys=
+# 열거하는 동안 첫 번째 입력기 건너뛰기
+EnumerateSkipFirst=False
+# Time limit in milliseconds for triggering modifier key shortcuts
+ModifierOnlyKeyTimeout=250
+
+[Hotkey/TriggerKeys]
+0=Hangul
+
+[Hotkey/ActivateKeys]
+0=Hangul_Hanja
+
+[Hotkey/DeactivateKeys]
+0=Hangul_Romaja
+
+[Hotkey/AltTriggerKeys]
+0=Shift_L
+
+[Hotkey/EnumerateGroupForwardKeys]
+0=Super+space
+
+[Hotkey/EnumerateGroupBackwardKeys]
+0=Shift+Super+space
+
+[Hotkey/PrevPage]
+0=Up
+
+[Hotkey/NextPage]
+0=Down
+
+[Hotkey/PrevCandidate]
+0=Shift+Tab
+
+[Hotkey/NextCandidate]
+0=Tab
+
+[Hotkey/TogglePreedit]
+0=Control+Alt+P
+
+[Behavior]
+# 기본적으로 활성화
+ActiveByDefault=False
+# Reset state on Focus In
+resetStateWhenFocusIn=No
+# 입력 상태 공유
+ShareInputState=No
+# 응용프로그램에서 사전편집 표시
+PreeditEnabledByDefault=True
+# 입력기 변경시 입력기 정보 표시
+ShowInputMethodInformation=True
+# 포커스를 변경할 때 입력기 정보 표시
+showInputMethodInformationWhenFocusIn=False
+# 간결한 입력기 정보 표시
+CompactInputMethodInformation=True
+# 첫 번째 입력기 정보 표시
+ShowFirstInputMethodInformation=True
+# 페이지 크기 기본값
+DefaultPageSize=5
+# Override XKB Option
+OverrideXkbOption=False
+# Custom XKB Option
+CustomXkbOption=
+# Force Enabled Addons
+EnabledAddons=
+# Force Disabled Addons
+DisabledAddons=
+# Preload input method to be used by default
+PreloadInputMethod=True
+# Allow input method in the password field
+AllowInputMethodForPassword=False
+# Show preedit text when typing password
+ShowPreeditForPassword=False
+# Interval of saving user data in minutes
+AutoSavePeriod=30
+
