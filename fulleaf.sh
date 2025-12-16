@@ -360,9 +360,9 @@ ROOT_UUID=$(arch-chroot "$ROOT_MNT" findmnt / -no UUID)
 cat <<EOF > "$ENTRIES_DIR/Fulleaf.conf"
 title   Fulleaf Linux
 linux   /vmlinuz-linux
-initrd  /$cpu_vendor.img
+initrd  /$cpu_vendor-ucode.img
 initrd  /initramfs-linux.img
-options root=UUID=$ROOT_UUID rootflags=subvol=@ rw quiet splash plymouth.use-simpledrm
+options root=UUID=$ROOT_UUID rootflags=subvol=@root rw quiet splash plymouth.use-simpledrm
 EOF
 
 echo "find Microsoft Windows EFI ..."
