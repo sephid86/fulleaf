@@ -8,6 +8,7 @@
 # Copyright (c) 2025 sephid86 (sephid86@gmail.com)
 # License : GNU GPLv3
 # --------------------------------------------------
+# 테스트 완료 마크 251217
 
 usage() {
   echo "usage: $0 --userid <ID> --userpw <PW> --rootpw <PW>"
