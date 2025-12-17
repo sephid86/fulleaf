@@ -522,7 +522,7 @@ if [ "$INSTALL_HYPR" == "true" ]; then
   pacfile fulleaf-gui fulleaf-hypr
 
   #gnome 설치가 아니면 regreet 설치
-  if [[ "$INSTALL_GNOME" != "true" || "$INSTALL_SWAY" != "true" ]]; then
+  if [[ "$INSTALL_GNOME" != "true" ]]; then
     pac greetd greetd-regreet cage
     sed -i 's|^command[[:space:]]*=.*|command = "cage regreet"|g' /mnt/etc/greetd/config.toml
     arch-chroot /mnt systemctl enable greetd
