@@ -520,12 +520,18 @@ fi
 #hyprland -
 if [ "$INSTALL_HYPR" == "true" ]; then
   pacfile fulleaf-gui fulleaf-hypr
-
-  #gnome 설치가 아니면 regreet 설치
   if [[ "$INSTALL_GNOME" != "true" ]]; then
     pac greetd greetd-regreet cage
-    sed -i 's|^command[[:space:]]*=.*|command = "cage regreet"|g' /mnt/etc/greetd/config.toml
+    if [ -f /mnt/etc/greetd/config.toml ]; then
+      sed -i 's|^command[[:space:]]*=.*|command = "cage -s -d -- regreet"|g' /mnt/etc/greetd/config.toml
+    fi
     arch-chroot /mnt systemctl enable greetd
+  fi
+
+  if [ "$INSTALL_GNOME" == "true" ]; then
+    if [ -f "/mnt/etc/xdg/autostart/org.fcitx.Fcitx5.desktop" ]; then
+      rm "/mnt/etc/xdg/autostart/org.fcitx.Fcitx5.desktop"
+    fi
   fi
 fi
 #sway -
