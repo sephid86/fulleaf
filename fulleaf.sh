@@ -328,7 +328,7 @@ else
   exit 1
 fi
 
-pacman -Syu
+pacman -Sy
 echo "CPU Vendor: $cpu_vendor"
 pacstrap /mnt $(cat fulleaf-pacstrap) ${cpu_vendor:+"$cpu_vendor-ucode"}
 genfstab -U /mnt >> /mnt/etc/fstab
