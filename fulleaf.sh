@@ -9,7 +9,7 @@
 # License : GNU GPLv3
 # --------------------------------------------------
 # 테스트 완료 마크 251217
-
+export LC_ALL=C
 usage() {
   echo "usage: $0 --userid <ID> --userpw <PW> --rootpw <PW>"
   echo "        [--tmode] [--gnome] [--hypr] [--sway]"
@@ -212,20 +212,20 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
 
     echo "--> Btrfs Partition crate volume and mount. : /"
     mkdir -p /mnt
-    mount $btrfs_root_partition /mnt
-    btrfs subvolume create "/mnt/@"
+    mount -o subvolid=5 $btrfs_root_partition /mnt
+    btrfs subvolume create /mnt/@
 
-# 3. 최상위 파티션 언마운트 (매우 중요)
+# # 3. 최상위 파티션 언마운트 (매우 중요)
 echo "--> Unmounting /mnt."
 umount /mnt
-
-# 4. @root 서브볼륨을 /mnt에 다시 마운트 (실제 OS 설치 위치)
+#
+# # 4. @root 서브볼륨을 /mnt에 다시 마운트 (실제 OS 설치 위치)
 echo "--> Mounting @ subvolume to /mnt."
 mount -o subvol=@ "$btrfs_root_partition" /mnt
 
     echo "--> EFI Partition mount. : /mnt/boot mount."
     mkdir -p /mnt/boot
-    mount "$boot_efi_partition" "/mnt/boot"
+    mount -o umask=0077 "$boot_efi_partition" "/mnt/boot"
 
   elif [[ "$storage_mode" -eq 1 ]]; then
     echo "this mode is support not yet."
@@ -329,11 +329,13 @@ else
   exit 1
 fi
 
+mkdir /mnt/etc
+touch /mnt/etc/vconsole.conf
+
 pacman -Sy
 echo "CPU Vendor: $cpu_vendor"
 pacstrap /mnt $(cat fulleaf-pacstrap) ${cpu_vendor:+"$cpu_vendor-ucode"}
 genfstab -U /mnt >> /mnt/etc/fstab
-touch /mnt/etc/vconsole.conf
 
 #3-Boot loader
 
