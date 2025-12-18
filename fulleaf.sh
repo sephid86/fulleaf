@@ -8,7 +8,7 @@
 # Copyright (c) 2025 sephid86 (sephid86@gmail.com)
 # License : GNU GPLv3
 # --------------------------------------------------
-# 테스트 완료 마크 251217
+
 export LC_ALL=C
 usage() {
   echo "usage: $0 --userid <ID> --userpw <PW> --rootpw <PW>"
@@ -32,7 +32,7 @@ usage() {
   echo "                  Format only the root (/) partition."
   exit 1
 }
-#c-code execl("/usr/bin/env", "bash", script_path, "--userpw", "aa", "--rootpw", "bb", (char *)NULL);
+
 error_handler() {
   echo "----------------------------------------"
   echo "ERROR"
@@ -68,7 +68,7 @@ pacfile() {
       echo "Error : $pkg_list_file file not found. skip"
     fi
   done
-  
+
   if [ -n "$all_packages" ]; then
     arch-chroot /mnt pacman -Sy --noconfirm $all_packages
   fi
@@ -215,13 +215,11 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
     mount -o subvolid=5 $btrfs_root_partition /mnt
     btrfs subvolume create /mnt/@
 
-# # 3. 최상위 파티션 언마운트 (매우 중요)
-echo "--> Unmounting /mnt."
-umount /mnt
-#
-# # 4. @root 서브볼륨을 /mnt에 다시 마운트 (실제 OS 설치 위치)
-echo "--> Mounting @ subvolume to /mnt."
-mount -o subvol=@ "$btrfs_root_partition" /mnt
+    echo "--> Unmounting /mnt."
+    umount /mnt
+    #
+    echo "--> Mounting @ subvolume to /mnt."
+    mount -o subvol=@ "$btrfs_root_partition" /mnt
 
     echo "--> EFI Partition mount. : /mnt/boot mount."
     mkdir -p /mnt/boot
@@ -338,14 +336,20 @@ pacstrap /mnt $(cat fulleaf-pacstrap) ${cpu_vendor:+"$cpu_vendor-ucode"}
 genfstab -U /mnt >> /mnt/etc/fstab
 
 #3-Boot loader
-
-
-#systemdboot
 ENTRIES_DIR="$BOOT_MNT/loader/entries"
 TEMP_MNT="/tmp/win_efi_temp"
 
 echo "systemd-boot install..."
-arch-chroot "$ROOT_MNT" bootctl install
+
+# 이유는 모르겠지만 arch-chroot 에서 bootctl install 하면 
+# BIOS 에 EFI 등록이 실패합니다. --esp-path 를 사용합니다.
+# -
+# CAUTION: 'bootctl install' in 'arch-chroot' fails to register EFI.
+# WORKAROUND: Execute from host environment with --esp-path.
+# -
+# arch-chroot "$ROOT_MNT" bootctl install
+# -
+bootctl --esp-path="$ROOT_MNT/boot" install
 
 echo "loader.conf make..."
 mkdir -p "$BOOT_MNT/loader" # 실제 파일 경로
@@ -396,19 +400,15 @@ while read -r LINE; do
       cp -r "$TEMP_MNT/EFI/Microsoft" "$BOOT_MNT/EFI/"
 
       WIN_ENTRY_CONF="$ENTRIES_DIR/windows_$COUNT.conf"
-      cat <<EOF > "$WIN_ENTRY_CONF"
-title   Windows Boot Manager ($COUNT)
-efi     /EFI/Microsoft/Boot/bootmgfw.efi
-EOF
-
-COUNT=$((COUNT + 1))
+      echo "title   Windows Boot Manager ($COUNT)" > "$WIN_ENTRY_CONF"
+      echo "efi     /EFI/Microsoft/Boot/bootmgfw.efi" >> "$WIN_ENTRY_CONF"
+      COUNT=$((COUNT + 1))
     fi
 
     umount "$TEMP_MNT"
   fi
 done <<< "$VEC_PARTITIONS"
 rmdir "$TEMP_MNT"
-
 
 #4-env
 cp /etc/os-release /mnt/etc/os-release
@@ -448,11 +448,6 @@ sed -i '/^HOOKS=/s/)$/ plymouth)/' /mnt/etc/mkinitcpio.conf
 # Server = https://mirror.siwoo.org/\$repo/os/\$arch
 # EOF
 
-# mirrorlist
-# Server = ftp.harukasan.org
-# Server = mirror.funman.xyz
-# Server = mirror.premi.st
-
 add_env EDITOR nvim
 add_env VISUAL nvim
 add_env ELECTRON_ENABLE_WAYLAND 1
@@ -484,26 +479,12 @@ echo $USER_ID:$USER_PW | arch-chroot /mnt chpasswd
 arch-chroot /mnt su - $USER_ID -c 'git config --global core.editor nvim'
 
 #6-GUI install
-
-# 다크 모드 설정
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
-
-# GTK 테마 설정
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme \"'Adwaita-dark'\""
-
-# 아이콘 테마 설정
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/icon-theme \"'Adwaita'\""
-
-# 커서 테마 설정
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/cursor-theme \"'Vimix-white-cursors'\""
-
-# 커서 크기 설정
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/interface/cursor-size 24"
-
-# 입력 소스 설정 (ibus 한글)
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/input-sources/sources \"[('ibus','hangul')]\""
-
-# 키보드 옵션 설정 (한/영, 한자 키 매핑)
 arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/desktop/input-sources/xkb-options \"['korean:ralt_hangul','korean:rctrl_hanja']\""
 
 # arch-chroot /mnt su - "${USER_ID}" -c "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
