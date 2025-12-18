@@ -4,16 +4,13 @@
 
 풀잎 리눅스 - (Fulleaf Linux) <br>
 --
-- 최근 업데이트 2025년 01월 07일 <br>
-- 최근 테스트 2025년 11월 23일 : 설치 불가 <br>
-- ### 잠정적으로 개발을 중단합니다.
-갈아 엎고 새로 만드는 중입니다. coming soon...
+- 최근 업데이트 2025년 12월 19일 <br>
 
 <br>
 
 풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.<br>
 --
-https://drive.google.com/file/d/18WRQZHoanQEq_kopzAN-6dbZcTZ1vBQM/view?usp=drive_link
+https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive_link
 <br>
 <br>
 <br>
