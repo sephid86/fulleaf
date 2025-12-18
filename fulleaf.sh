@@ -333,6 +333,7 @@ pacman -Sy
 echo "CPU Vendor: $cpu_vendor"
 pacstrap /mnt $(cat fulleaf-pacstrap) ${cpu_vendor:+"$cpu_vendor-ucode"}
 genfstab -U /mnt >> /mnt/etc/fstab
+touch /mnt/etc/vconsole.conf
 
 #3-Boot loader
 
