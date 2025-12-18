@@ -70,12 +70,12 @@ pacfile() {
   done
 
   if [ -n "$all_packages" ]; then
-    arch-chroot /mnt pacman -Sy --noconfirm $all_packages
+    arch-chroot /mnt pacman -S --noconfirm $all_packages
   fi
 }
 
 pac() {
-  arch-chroot /mnt pacman -Sy --noconfirm "$@"
+  arch-chroot /mnt pacman -S --noconfirm "$@"
 }
 
 trap 'error_handler' ERR
@@ -223,7 +223,8 @@ if [[ -n "$storage" && -n "$storage_mode" ]]; then
 
     echo "--> EFI Partition mount. : /mnt/boot mount."
     mkdir -p /mnt/boot
-    mount -o umask=0077 "$boot_efi_partition" "/mnt/boot"
+    # mount -o umask=0077 "$boot_efi_partition" "/mnt/boot"
+    mount "$boot_efi_partition" "/mnt/boot"
 
   elif [[ "$storage_mode" -eq 1 ]]; then
     echo "this mode is support not yet."
@@ -330,14 +331,13 @@ fi
 mkdir /mnt/etc
 touch /mnt/etc/vconsole.conf
 
-pacman -Sy
+pacman -Syy
 echo "CPU Vendor: $cpu_vendor"
 pacstrap /mnt $(cat fulleaf-pacstrap) ${cpu_vendor:+"$cpu_vendor-ucode"}
 genfstab -U /mnt >> /mnt/etc/fstab
 
 #3-Boot loader
 ENTRIES_DIR="$BOOT_MNT/loader/entries"
-TEMP_MNT="/tmp/win_efi_temp"
 
 echo "systemd-boot install..."
 
@@ -354,7 +354,7 @@ bootctl --esp-path="$ROOT_MNT/boot" install
 echo "loader.conf make..."
 mkdir -p "$BOOT_MNT/loader" # 실제 파일 경로
 cat <<EOF > "$BOOT_MNT/loader/loader.conf"
-default  Fulleaf
+default  Fulleaf.conf
 timeout  5
 console-mode max
 editor   no
@@ -372,43 +372,6 @@ initrd  /$cpu_vendor-ucode.img
 initrd  /initramfs-linux.img
 options root=UUID=$ROOT_UUID rootflags=subvol=@ rw quiet splash plymouth.use-simpledrm
 EOF
-
-echo "find Microsoft Windows EFI ..."
-
-VEC_PARTITIONS=$(blkid | grep "vfat")
-
-mkdir -p "$TEMP_MNT"
-
-COUNT=1
-
-while read -r LINE; do
-  PART_PATH=$(echo "$LINE" | awk -F':' '{print $1}')
-  PART_UUID=$(echo "$LINE" | grep -o 'UUID="[^"]*"' | cut -d'"' -f2)
-
-  # Arch ESP pass (chroot outside)
-  ARCH_ESP_PATH=$(findmnt -n --raw -o SOURCE "$BOOT_MNT")
-  if [ "$PART_PATH" == "$ARCH_ESP_PATH" ]; then
-    continue
-  fi
-
-  mount "$PART_PATH" "$TEMP_MNT" 2>/dev/null
-
-  if [ $? -eq 0 ]; then
-    if [ -f "$TEMP_MNT/EFI/Microsoft/Boot/bootmgfw.efi" ]; then
-      echo "  -> Windows bootloader found. ($PART_PATH)."
-
-      cp -r "$TEMP_MNT/EFI/Microsoft" "$BOOT_MNT/EFI/"
-
-      WIN_ENTRY_CONF="$ENTRIES_DIR/windows_$COUNT.conf"
-      echo "title   Windows Boot Manager ($COUNT)" > "$WIN_ENTRY_CONF"
-      echo "efi     /EFI/Microsoft/Boot/bootmgfw.efi" >> "$WIN_ENTRY_CONF"
-      COUNT=$((COUNT + 1))
-    fi
-
-    umount "$TEMP_MNT"
-  fi
-done <<< "$VEC_PARTITIONS"
-rmdir "$TEMP_MNT"
 
 #4-env
 cp /etc/os-release /mnt/etc/os-release
@@ -435,18 +398,12 @@ arch-chroot /mnt sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g
 # sed -i '/^HOOKS=/s/udev /udev plymouth /' /mnt/etc/mkinitcpio.conf
 sed -i '/^HOOKS=/s/)$/ plymouth)/' /mnt/etc/mkinitcpio.conf
 
-# cat <<EOF > "/mnt/etc/pacman.d/mirrorlist"
-# ## South Korea
-# Server = https://kr.mirrors.cicku.me/\$repo/os/\$arch
-# Server = https://mirror.techlabs.co.kr/\$repo/os/\$arch
-# Server = https://mirror.distly.kr/\$repo/os/\$arch
-# Server = https://ftp.hrts.kr/\$repo/os/\$arch
-# Server = https://mirror.keiminem.com/\$repo/os/\$arch
-# Server = https://mirror2.keiminem.com/\$repo/os/\$arch
-# Server = https://mirror.krfoss.org/\$repo/os/\$arch
-# Server = https://ftp.lanet.kr/\$repo/os/\$arch
-# Server = https://mirror.siwoo.org/\$repo/os/\$arch
-# EOF
+cat <<'EOF' > /mnt/etc/pacman.d/mirrorlist
+Server = https://fastly.mirror.pkgbuild.com/$repo/os/$arch
+Server = https://ftp.lanet.kr/pub/archlinux/$repo/os/$arch
+Server = https://mirror.funami.tech/arch/$repo/os/$arch
+Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
+EOF
 
 add_env EDITOR nvim
 add_env VISUAL nvim
@@ -495,6 +452,8 @@ arch-chroot /mnt runuser -l "${USER_ID}" -c "dbus-launch dconf write /org/gnome/
 
 arch-chroot /mnt mkdir -p /etc/skel/.config/dconf
 arch-chroot /mnt cp /home/${USER_ID}/.config/dconf/user /etc/skel/.config/dconf
+
+pacman -Syy
 #gnome -
 if [ "$INSTALL_GNOME" == "true" ]; then
   pacfile fulleaf-gui fulleaf-gnome
@@ -523,7 +482,7 @@ fi
 if [ "$INSTALL_SWAY" == "true" ]; then
   echo "Error : Sway installation is not yet supported." >&2
   exit 1
-  # arch-chroot /mnt pacman -Sy --noconfirm $(cat fulleaf-sway)
+  # arch-chroot /mnt pacman -S --noconfirm $(cat fulleaf-sway)
   #
   # cp -rf /usr/share/wayland-sessions /mnt/usr/share/"
   # cp /usr/bin/sway-fcitx /mnt/bin/"
