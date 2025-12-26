@@ -8,13 +8,13 @@ binds {
   //   spawn "sh" "-c" "foot bash -ic 'r; exec bash' & sleep 0.1 && niri msg action consume-or-expel-window-left"
   // }
   Mod+e hotkey-overlay-title="Open a yazi" { spawn "foot" "-a" "foot-floating" "bash" "-ic" "r; exec bash"; }
-// Mod+Return { spawn "foot"; consume-or-expel-window-left; }
-// Mod+Shift+E를 누르면 foot을 띄우고 0.1초 뒤에 왼쪽으로 자동 합류합니다.
+  // Mod+Return { spawn "foot"; consume-or-expel-window-left; }
+  // Mod+Shift+E를 누르면 foot을 띄우고 0.1초 뒤에 왼쪽으로 자동 합류합니다.
   // Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun" "-I"; }
-  
-Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
-  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "~/.config/niri/scripts/osd.lua volume_up"; }
+  Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+
+  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 0.1+"; }
   XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
   XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
@@ -173,11 +173,11 @@ Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
   // moving the mouse or pressing any other key.
   // Mod+Shift+P { power-off-monitors; }
 
-Mod+Slash {
+  Mod+Slash {
     spawn "sh" "-c" "SINK_JSON=$(pw-dump | jq '[.[] | select(.type == \"PipeWire:Interface:Node\") | select(.info.props.\"media.class\" == \"Audio/Sink\") | {id: .id, description: .info.props.\"node.description\"}] | sort_by(.description)'); SINK_NAMES=$(echo \"$SINK_JSON\" | jq -r '.[].description'); SELECTED_NAME=$(echo \"$SINK_NAMES\" | fuzzel --dmenu --cache=$HOME/.cache/sinklist_fuzzel --prompt='Audio Output ' --anchor=top-right --x-margin=60 --y-margin=20 --width=30 --lines=3 --inner-pad=0); if [ -n \"$SELECTED_NAME\" ]; then SINK_ID=$(echo \"$SINK_JSON\" | jq -r \".[] | select(.description == \\\"$SELECTED_NAME\\\") | .id\"); wpctl set-default $SINK_ID; fi"
-}
+  }
 
-Mod+shift+slash{
+  Mod+shift+slash{
     spawn "sh" "-c" "DEVICES=$(bluetoothctl devices | grep 'Device' | awk '{print $2 \"|\" $3,$4,$5,$6,$7,$8,$9}'); DEVICE_NAMES=$(echo \"$DEVICES\" | cut -d'|' -f2); SELECTED_NAME=$(echo \"$DEVICE_NAMES\" | fuzzel --dmenu --cache=$HOME/cache/blthlist_fuzzel --prompt='Bluetooth Devices ' --anchor=top-right --x-margin=60 --y-margin=20 --width=25 --lines=3); if [ -n \"$SELECTED_NAME\" ]; then MAC_ADDR=$(echo \"$DEVICES\" | grep \"$SELECTED_NAME\" | cut -d'|' -f1); bluetoothctl connect $MAC_ADDR; fi"
-}
+  }
 }
