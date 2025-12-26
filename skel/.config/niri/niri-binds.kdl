@@ -3,9 +3,10 @@ binds {
   Mod+ctrl+Slash { show-hotkey-overlay; }
 
   Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-  Mod+shift+return hotkey-overlay-title="Open a yazi" { 
-    spawn "sh" "-c" "foot bash -ic 'r; exec bash' & sleep 0.1 && niri msg action consume-or-expel-window-left"
-  }
+  Mod+shift+return hotkey-overlay-title="Open a yazi" { spawn "foot" "bash" "-ic" "r; exec bash"; }
+  // Mod+shift+return hotkey-overlay-title="Open a yazi" { 
+  //   spawn "sh" "-c" "foot bash -ic 'r; exec bash' & sleep 0.1 && niri msg action consume-or-expel-window-left"
+  // }
   Mod+e hotkey-overlay-title="Open a yazi" { spawn "foot" "-a" "foot-floating" "bash" "-ic" "r; exec bash"; }
 // Mod+Return { spawn "foot"; consume-or-expel-window-left; }
 // Mod+Shift+E를 누르면 foot을 띄우고 0.1초 뒤에 왼쪽으로 자동 합류합니다.
