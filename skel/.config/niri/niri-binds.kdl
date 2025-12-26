@@ -1,18 +1,19 @@
-
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Screenshots/ss-%y%m%d-%H%M%S.png"
 binds {
-  Mod+Shift+Slash { show-hotkey-overlay; }
+  Mod+ctrl+Slash { show-hotkey-overlay; }
 
   Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-  // Mod+e hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; consume-or-expel-window-left }
-  // Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-
+  Mod+shift+return hotkey-overlay-title="Open a yazi" { 
+    spawn "sh" "-c" "foot bash -ic 'r; exec bash' & sleep 0.1 && niri msg action consume-or-expel-window-left"
+  }
+  Mod+e hotkey-overlay-title="Open a yazi" { spawn "foot" "-a" "foot-floating" "bash" "-ic" "r; exec bash"; }
+// Mod+Return { spawn "foot"; consume-or-expel-window-left; }
 // Mod+Shift+E를 누르면 foot을 띄우고 0.1초 뒤에 왼쪽으로 자동 합류합니다.
-  // Mod+Shift+e hotkey-overlay-title="Open a Terminal: foot" { spawn "foot" "-a" "foot-floating" "bash" "-ic" "r; exec bash"; consume-or-expel-window-left; }
-  // Mod+Shift+e hotkey-overlay-title="Open a Terminal: foot" { spawn "foot" "-a" "foot-floating" "bash" "-ic" "r; exec bash";consume-or-expel-window-left }
-  Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun" "-I"; }
+  // Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun" "-I"; }
+  
+Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
-  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "~/.config/niri/scripts/osd.lua volume_up"; }
   XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
   XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
   XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
@@ -24,8 +25,20 @@ binds {
   XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
   XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
 
-  XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+  // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+  // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+  // XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+  // XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+  //
+  // // Example media keys mapping using playerctl.
+  // // This will work with any MPRIS-enabled media player.
+  // XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+  // XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+  // XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+  // XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+
+  // XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+  // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
   Mod+Q repeat=false { toggle-overview; }
   Mod+Shift+Q repeat=false { close-window; }
@@ -49,16 +62,16 @@ binds {
   Mod+shift+L     { move-column-right; }
 
   // Alternative commands that move across workspaces when reaching
-  // the first or last window in a column.
+  // the fir<D-o>st or last window in a column.
   // Mod+J     { focus-window-or-workspace-down; }
   // Mod+K     { focus-window-or-workspace-up; }
   // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
   // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
-  Mod+Home { focus-column-first; }
-  Mod+End  { focus-column-last; }
-  Mod+Ctrl+Home { move-column-to-first; }
-  Mod+Ctrl+End  { move-column-to-last; }
+  Mod+i { focus-column-first; }
+  Mod+o  { focus-column-last; }
+  Mod+Ctrl+i { move-column-to-first; }
+  Mod+Ctrl+o  { move-column-to-last; }
 
   // Mod+ctrl+Left  { focus-monitor-left; }
   // Mod+ctrl+Down  { focus-monitor-down; }
@@ -82,13 +95,13 @@ binds {
   Mod+semicolon      { focus-workspace-down; }
   Mod+shift+p   { move-column-to-workspace-up; }
   Mod+shift+semicolon { move-column-to-workspace-down; }
-  Mod+Ctrl+U         { move-column-to-workspace-down; }
-  Mod+Ctrl+I         { move-column-to-workspace-up; }
+  // Mod+Ctrl+p         { move-column-to-workspace-up; }
+  // Mod+Ctrl+semicolon         { move-column-to-workspace-down; }
 
-  Mod+Shift+Page_Down { move-workspace-down; }
-  Mod+Shift+Page_Up   { move-workspace-up; }
-  Mod+Shift+U         { move-workspace-down; }
-  Mod+Shift+I         { move-workspace-up; }
+  // Mod+Shift+Page_Down { move-workspace-down; }
+  // Mod+Shift+Page_Up   { move-workspace-up; }
+  // Mod+Shift+U         { move-workspace-down; }
+  // Mod+Shift+I         { move-workspace-up; }
 
   Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
   Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
@@ -105,19 +118,18 @@ binds {
   Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
   Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
-  // Mod+BracketLeft  { consume-or-expel-window-left; }
+  Mod+Period { consume-or-expel-window-right; }
   Mod+comma  { consume-or-expel-window-left; }
+  // Mod+BracketLeft  { consume-or-expel-window-left; }
   // Mod+BracketRight { consume-or-expel-window-right; }
-
-  // Mod+Comma  { consume-window-into-column; }
-  Mod+Period { expel-window-from-column; }
 
   Mod+R { switch-preset-column-width; }
   // Cycling through the presets in reverse order is also possible.
   // Mod+R { switch-preset-column-width-back; }
   Mod+Shift+R { switch-preset-window-height; }
   Mod+Ctrl+R { reset-window-height; }
-  Mod+m { maximize-column; }
+
+  Mod+shift+f { maximize-column; }
   Mod+F { fullscreen-window; }
 
   // Expand the focused column to space not taken up by other fully visible columns.
@@ -125,15 +137,13 @@ binds {
   Mod+Ctrl+F { expand-column-to-available-width; }
 
   Mod+C { center-column; }
-
   // Center all fully visible columns on screen.
   Mod+shift+C { center-visible-columns; }
 
-  Mod+Equal { set-column-width "+10%"; }
-  Mod+Minus { set-column-width "-10%"; }
-
-  Mod+Shift+Equal { set-window-height "+10%"; }
-  Mod+Shift+Minus { set-window-height "-10%"; }
+  Mod+ctrl+l { set-column-width "+10%"; }
+  Mod+ctrl+h { set-column-width "-10%"; }
+  Mod+ctrl+k { set-window-height "+10%"; }
+  Mod+ctrl+j { set-window-height "-10%"; }
 
   Mod+z       { toggle-window-floating; }
   Mod+Space { switch-focus-between-floating-and-tiling; }
@@ -141,8 +151,8 @@ binds {
   Mod+v { toggle-column-tabbed-display; }
 
   Print { screenshot; }
-  Ctrl+Print { screenshot-screen; }
-  Alt+Print { screenshot-window; }
+  shift+Print { screenshot-screen; }
+  ctrl+Print { screenshot-window; }
 
   // Applications such as remote-desktop clients and software KVM switches may
   // request that niri stops processing the keyboard shortcuts defined here
@@ -155,10 +165,18 @@ binds {
   Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
   // The quit action will show a confirmation dialog to avoid accidental exits.
-  Mod+Shift+x { quit; }
+  Mod+Shift+e { quit; }
   Ctrl+Alt+Delete { quit; }
 
   // Powers off the monitors. To turn them back on, do any input like
   // moving the mouse or pressing any other key.
   // Mod+Shift+P { power-off-monitors; }
+
+Mod+Slash {
+    spawn "sh" "-c" "SINK_JSON=$(pw-dump | jq '[.[] | select(.type == \"PipeWire:Interface:Node\") | select(.info.props.\"media.class\" == \"Audio/Sink\") | {id: .id, description: .info.props.\"node.description\"}] | sort_by(.description)'); SINK_NAMES=$(echo \"$SINK_JSON\" | jq -r '.[].description'); SELECTED_NAME=$(echo \"$SINK_NAMES\" | fuzzel --dmenu --cache=$HOME/.cache/sinklist_fuzzel --prompt='Audio Output ' --anchor=top-right --x-margin=60 --y-margin=20 --width=30 --lines=3 --inner-pad=0); if [ -n \"$SELECTED_NAME\" ]; then SINK_ID=$(echo \"$SINK_JSON\" | jq -r \".[] | select(.description == \\\"$SELECTED_NAME\\\") | .id\"); wpctl set-default $SINK_ID; fi"
+}
+
+Mod+shift+slash{
+    spawn "sh" "-c" "DEVICES=$(bluetoothctl devices | grep 'Device' | awk '{print $2 \"|\" $3,$4,$5,$6,$7,$8,$9}'); DEVICE_NAMES=$(echo \"$DEVICES\" | cut -d'|' -f2); SELECTED_NAME=$(echo \"$DEVICE_NAMES\" | fuzzel --dmenu --cache=$HOME/cache/blthlist_fuzzel --prompt='Bluetooth Devices ' --anchor=top-right --x-margin=60 --y-margin=20 --width=25 --lines=3); if [ -n \"$SELECTED_NAME\" ]; then MAC_ADDR=$(echo \"$DEVICES\" | grep \"$SELECTED_NAME\" | cut -d'|' -f1); bluetoothctl connect $MAC_ADDR; fi"
+}
 }
