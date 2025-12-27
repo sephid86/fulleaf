@@ -17,10 +17,10 @@ https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive
 - 스크린샷에 보이는 위젯은 aur 에서 eww 를 설치하시면 적용됩니다.
 - Automated Korean input is enabled.
 - Added useful customizations for a few other apps.
-- The widgets in the screenshot are available by installing eww from the AUR.  <br>
+- The widgets in the screenshot are available by installing eww from the AUR. <br>
 ---
-또한, 소소한 유틸리티들을 개발하며 드물게 가끔 다른 오픈소스 프로젝트에도 아주 작지만 기여를 하고 있습니다. <br>
 I also develop small utilities and occasionally contribute to other projects. <br>
+또한, 소소한 유틸리티들을 개발하며 드물게 가끔 다른 오픈소스 프로젝트에도 아주 작지만 기여를 하고 있습니다. <br>
  <br>
 I'm working towards becoming Cup Noodles Profitable. <br>
 이 개발자는 오늘 굶었을지도 모릅니다. <br>
