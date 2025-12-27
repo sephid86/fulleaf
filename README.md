@@ -34,5 +34,6 @@ I'm working towards becoming Cup Noodles Profitable. <br>
 풀잎 리눅스를 가상머신에 설치하는 경우 
 -
 가상머신을 efi 로 설정 해줘야 합니다.<br>
+You must enable EFI/UEFI in your virtual machine settings to install Fulleaf Linux.<br>
 <br>
 <br>
