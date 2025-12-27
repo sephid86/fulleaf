@@ -8,10 +8,7 @@
 <br>
 (스크린샷에 보이는 위젯은 aur 에서 eww 를 설치하시면 적용됩니다.)
 
-<br>
-
-[![ Buy me a Cup noodles. ](https://img.shields.io/badge/Buy%20me%20a%20cup%20noodle.%20%2d%20컵라면%20하나만%20사주세요.-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/sephid86)
-<br>
+[![ Buy me a Cup noodles. ](https://img.shields.io/badge/Buy%20me%20a%20cup%20noodles-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/sephid86)
 <br>
 풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.<br>
 --
