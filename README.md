@@ -23,12 +23,9 @@ I'm working towards becoming Cup noddles Profitable. <br>
 --
 https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive_link
 <br>
-<br>
-<br>
 
 풀잎 리눅스를 가상머신에 설치하는 경우 
 -
 가상머신을 efi 로 설정 해줘야 합니다.<br>
 <br>
-
 <br>
