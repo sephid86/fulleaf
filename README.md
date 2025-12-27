@@ -40,7 +40,9 @@ You must enable EFI/UEFI in your virtual machine settings to install Fulleaf Lin
 
 엔비디아 GPU (Nvidia GPU)
 --
-엔비디아 장치가 없어서 테스트 해보지 못했습니다. 
-정상적인 동작을 보장하지 못합니다.
-Due to the lack of an Nvidia device, this has not been tested. 
-Proper operation cannot be guaranteed.
+엔비디아 장치가 없어서 테스트 해보지 못했습니다. <br>
+정상적인 동작을 보장하지 못합니다. <br>
+Due to the lack of an Nvidia device, this has not been tested. <br>
+Proper operation cannot be guaranteed. <br>
+<br>
+<br>
