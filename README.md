@@ -4,12 +4,16 @@
 
 - 최근 업데이트 2025년 12월 19일 <br>
 
-풀잎 리눅스 - (Fulleaf Linux) <br>
+풀잎 리눅스 - (Fulleaf Linux - Arch Linux derivative) <br>
 --
 - 한글 입력이 자동으로 설정되어 있습니다.
 - 몇몇 앱들에 사용하기 편리한 커스텀이 설정되어 있습니다.
-- 스크린샷에 보이는 위젯은 aur 에서 eww 를 설치하시면 적용됩니다.<br>
+- 스크린샷에 보이는 위젯은 aur 에서 eww 를 설치하시면 적용됩니다.
+- Automated Korean input is enabled.
+- Added useful customizations for a few other apps. <br>
 ---
+또한, 소소한 유틸리티들을 개발하며 드물게 가끔 다른 오픈소스 프로젝트에도 아주 작지만 기여를 하고 있습니다.
+I also develop small utilities and occasionally contribute to other projects.
 
 I'm working towards becoming Cup Noodles Profitable. <br>
 이 개발자는 오늘 굶었을지도 모릅니다. <br>
