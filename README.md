@@ -11,7 +11,6 @@
 - 스크린샷에 보이는 위젯은 aur 에서 eww 를 설치하시면 적용됩니다.
 <br>
 <br>
----
 <br>
 I'm working towards becoming Cup noddles Profitable.
 --
