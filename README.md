@@ -36,7 +36,7 @@ I'm working towards becoming Cup Noodles Profitable. <br>
 You must enable EFI/UEFI in your virtual machine settings to install Fulleaf Linux.<br>
 가상머신을 efi 로 설정 해줘야 합니다.<br>
 <br>
-<br>
+
 엔비디아 GPU (Nvidia GPU)
 --
 엔비디아 장치가 없어서 테스트 해보지 못했습니다. 
