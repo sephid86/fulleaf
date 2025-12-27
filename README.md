@@ -13,8 +13,8 @@
 - Added useful customizations for a few other apps. <br>
 ---
 또한, 소소한 유틸리티들을 개발하며 드물게 가끔 다른 오픈소스 프로젝트에도 아주 작지만 기여를 하고 있습니다. <br>
-I also develop small utilities and occasionally contribute to other projects.
-
+I also develop small utilities and occasionally contribute to other projects. <br>
+ <br>
 I'm working towards becoming Cup Noodles Profitable. <br>
 이 개발자는 오늘 굶었을지도 모릅니다. <br>
 
