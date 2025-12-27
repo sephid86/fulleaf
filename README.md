@@ -27,7 +27,7 @@ I'm working towards becoming Cup Noodles Profitable. <br>
 
 풀잎 리눅스 배포판은 아래 링크에서 다운로드 받으실수 있습니다.<br>
 --
-풀잎 리눅스 설치 ISO 파일 다운로드 (Download Fulleaf Linux Installation ISO File) <br>
+풀잎 리눅스 설치 ISO 파일 다운로드 <br>(Download Fulleaf Linux Installation ISO File) <br>
 --
 **[풀잎 리눅스 설치 ISO 파일 다운로드 (Download Fulleaf Linux Installation ISO File)](https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive_link)**
 
