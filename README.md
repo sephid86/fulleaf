@@ -8,7 +8,8 @@
 <br>
 https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive_link
 <br>
-- 최근 업데이트 2025년 12월 19일 <br>
+- 최근 업데이트 2025년 12월 19일 
+- Last update 2025-12-19 <br>
 
 풀잎 리눅스 (Fulleaf Linux - Arch Linux derivative) <br>
 --
