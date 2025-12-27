@@ -11,7 +11,7 @@ https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive
 - Last update 2025-12-19 
 - 최근 업데이트 2025년 12월 19일 <br>
 
-풀잎 리눅스 (Fulleaf Linux - Arch Linux derivative) <br>
+풀잎 리눅스 (Fulleaf Linux - based on Arch Linux) <br>
 --
 - Automated Korean input is enabled.
 - Added useful customizations for a few other apps.
