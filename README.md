@@ -8,13 +8,14 @@
 --
 - 한글 입력이 자동으로 설정되어 있습니다.
 - 몇몇 앱들에 사용하기 편리한 커스텀이 설정되어 있습니다.
----
-- 스크린샷에 보이는 위젯은 aur 에서 eww 를 설치하시면 적용됩니다.)<br>
+
+--
+- 스크린샷에 보이는 위젯은 aur 에서 eww 를 설치하시면 적용됩니다.<br>
 
 <br>
 <br>
 
---``
+--
 I'm working towards becoming Cup noddles Profitable.
 
 [![ Buy me a Cup noodles. ](https://img.shields.io/badge/Buy%20me%20a%20cup%20noodles-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/sephid86)<br>
