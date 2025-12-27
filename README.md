@@ -12,6 +12,7 @@
 ---
 
 I'm working towards becoming Cup noodles Profitable. <br>
+이 개발자는 오늘 굶었을지도 모릅니다. <br>
 
 [![ Buy me a Cup noodles ](https://img.shields.io/badge/Buy%20me%20a%20cup%20noodles-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/sephid86)
 <br>
