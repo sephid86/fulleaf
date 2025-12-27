@@ -4,12 +4,12 @@
 
 풀잎 리눅스 설치 ISO 파일 다운로드 <br>(Download Fulleaf Linux Installation ISO File) <br>
 --
-**[풀잎 리눅스 설치 ISO 파일 다운로드 <br>(Download Fulleaf Linux Installation ISO File)](https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive_link)**
+**[Download Fulleaf Linux Installation ISO File <br>풀잎 리눅스 설치 ISO 파일 다운로드](https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive_link)**
 <br>
 https://drive.google.com/file/d/1UYnub7zI72s1846a0JYXpdvHkGCIZzj3/view?usp=drive_link
 <br>
-- 최근 업데이트 2025년 12월 19일 
-- Last update 2025-12-19 <br>
+- Last update 2025-12-19 
+- 최근 업데이트 2025년 12월 19일 <br>
 
 풀잎 리눅스 (Fulleaf Linux - Arch Linux derivative) <br>
 --
@@ -40,9 +40,9 @@ You must enable EFI/UEFI in your virtual machine settings to install Fulleaf Lin
 
 엔비디아 GPU (Nvidia GPU)
 --
-엔비디아 장치가 없어서 테스트 해보지 못했습니다. <br>
-정상적인 동작을 보장하지 못합니다. <br>
 Due to the lack of an Nvidia device, this has not been tested. <br>
 Proper operation cannot be guaranteed. <br>
+엔비디아 장치가 없어서 테스트 해보지 못했습니다. <br>
+정상적인 동작을 보장하지 못합니다. <br>
 <br>
 <br>
