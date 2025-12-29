@@ -5,12 +5,12 @@
     // "width": 1280, // Waybar width
     //"spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
-    "modules-center": ["sway/window"],
+    "modules-left": ["niri/workspaces", "niri/mode", "niri/scratchpad", "custom/media"],
+    "modules-center": ["niri/window"],
     //"modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["mpd", "idle_inhibitor", "temperature", "cpu", "memory","network", "bluetooth", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "clock"],
+    "modules-right": ["mpris", "idle_inhibitor", "temperature", "cpu", "memory","network", "bluetooth", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "custom/notification", "clock"],
     // Modules configuration
-    // "sway/workspaces": {
+    // "hyprland/workspaces": {
     //     "disable-scroll": true,
     //     "all-outputs": true,
     //     "warp-on-scroll": false,
@@ -35,10 +35,10 @@
             "unlocked": ""
         }
     },
-    "sway/mode": {
+    "hyprland/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "sway/scratchpad": {
+    "hyprland/scratchpad": {
         "format": "{icon} {count}",
         "show-empty": false,
         "format-icons": ["", ""],
@@ -96,7 +96,7 @@
         //"format": "{:%Y-%m-%d %H:%M}"
     },
     "cpu": {
-        "format": "  {usage}%",
+        "format": " {usage}%",
 //        "tooltip": false
     },
     "memory": {
@@ -111,7 +111,7 @@
         "format-icons": ["", "", ""]
     },
     "backlight": {
-        // "controller": "acpi_video1",
+        // "device": "acpi_video1",
         "format": "{icon} {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
@@ -153,7 +153,7 @@
 },
     "pulseaudio": {
         "scroll-step": 5, // %, can be a float
-        "format": "{icon}  {volume}% {format_source}",
+        "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": " {volume}% {format_source}",
         "format-bluetooth-muted": "  {format_source}",
         "format-muted": "  {format_source}",
@@ -171,18 +171,49 @@
         "on-click": "pavucontrol",
         "on-click-right": "foot -a pw-top pw-top"
     },
-
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+  "custom/notification": {
+    "tooltip": true,
+    "format": "<span size='16pt'>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+"mpris": {
+    "format": "🎵 {artist}-{title}",         // 재생 중일 때 (기본)
+    "format-paused": "🎵⏸️ ",       // 일시정지 상태일 때
+    "format-stopped": "🎵⏹️ ",           // 정지 상태일 때
+    "max-length": 40,
+    "on-click": "playerctl play-pause",
+//    "status-icons": {
+//        "paused": "",
+//        "playing": "",
+//        "stopped": ""
+//    }
+}
+//    "custom/media": {
+//        "format": "{icon} {}",
+//        "return-type": "json",
+//        "max-length": 40,
+//        "format-icons": {
+//            "spotify": "",
+//            "default": "🎜"
+//        },
+//        "escape": true,
+//        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+//    }
 }
 

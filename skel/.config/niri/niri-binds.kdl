@@ -8,8 +8,6 @@ binds {
   //   spawn "sh" "-c" "foot bash -ic 'r; exec bash' & sleep 0.1 && niri msg action consume-or-expel-window-left"
   // }
   Mod+e hotkey-overlay-title="Open a yazi" { spawn "foot" "-a" "foot-floating" "bash" "-ic" "r; exec bash"; }
-  // Mod+Return { spawn "foot"; consume-or-expel-window-left; }
-  // Mod+Shift+E를 누르면 foot을 띄우고 0.1초 뒤에 왼쪽으로 자동 합류합니다.
   // Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun" "-I"; }
 
   Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
@@ -121,6 +119,8 @@ binds {
 
   Mod+Period { consume-or-expel-window-right; }
   Mod+comma  { consume-or-expel-window-left; }
+  // Mod+shift+Period { consume-or-expel-window-right; }
+  // Mod+shfit+comma  { consume-or-expel-window-left; }
   // Mod+BracketLeft  { consume-or-expel-window-left; }
   // Mod+BracketRight { consume-or-expel-window-right; }
 

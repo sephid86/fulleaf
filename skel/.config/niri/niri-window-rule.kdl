@@ -3,7 +3,10 @@ window-rule {
   geometry-corner-radius 4
   clip-to-geometry true
 }
-// prefer-no-csd
+window-rule {
+  match is-active=false
+  opacity 0.85
+}
 window-rule {
   // This regular expression is intentionally made as specific as possible,
   // since this is the default config, and we want no false positives.
@@ -14,7 +17,7 @@ window-rule {
 
 window-rule {
   match app-id="mpv"
-  default-column-width {}
+  // default-column-width {}
   // open-floating true
 }
 
@@ -62,4 +65,6 @@ window-rule {
 // // default-floating-height 300
 max-height 270
       default-floating-position x=10 y=10 relative-to="bottom-right"
+
+  opacity 1.0
 }

@@ -8,7 +8,7 @@
     "modules-left": ["hyprland/workspaces", "hyprland/mode", "hyprland/scratchpad", "custom/media"],
     "modules-center": ["hyprland/window"],
     //"modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["mpd", "idle_inhibitor", "temperature", "cpu", "memory","network", "bluetooth", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "custom/notification", "clock"],
+    "modules-right": ["mpris", "idle_inhibitor", "temperature", "cpu", "memory","network", "bluetooth", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "custom/notification", "clock"],
     // Modules configuration
     // "hyprland/workspaces": {
     //     "disable-scroll": true,
@@ -104,7 +104,7 @@
     },
     "temperature": {
         "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         "format-critical": "{icon} {temperatureC}°C",
         "format": "{icon} {temperatureC}°C",
@@ -191,17 +191,29 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+"mpris": {
+    "format": "🎵 {artist}-{title}",         // 재생 중일 때 (기본)
+    "format-paused": "🎵⏸️ ",       // 일시정지 상태일 때
+    "format-stopped": "🎵⏹️ ",           // 정지 상태일 때
+    "max-length": 40,
+    "on-click": "playerctl play-pause",
+//    "status-icons": {
+//        "paused": "",
+//        "playing": "",
+//        "stopped": ""
+//    }
+}
+//    "custom/media": {
+//        "format": "{icon} {}",
+//        "return-type": "json",
+//        "max-length": 40,
+//        "format-icons": {
+//            "spotify": "",
+//            "default": "🎜"
+//        },
+//        "escape": true,
+//        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+//    }
 }
 

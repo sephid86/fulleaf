@@ -76,7 +76,7 @@ input {
 layout {
   gaps 12
 
-  empty-workspace-above-first true
+  // empty-workspace-above-first true
   // struts {
   //     left 64
   //     right 64
@@ -90,7 +90,7 @@ layout {
   // - "on-overflow", focusing a column will center it if it doesn't fit
   //   together with the previously focused column.
   center-focused-column "never"
-
+// prefer-no-csd
   // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
   preset-column-widths {
     proportion 0.33333
@@ -112,7 +112,7 @@ layout {
 
   // If you don't like that, you should uncomment `prefer-no-csd` below.
   // `draw-border-with-background`.
-
+// prefer-no-csd
   focus-ring {
     // Uncomment this line to disable the focus ring.
     // off
@@ -170,11 +170,11 @@ layout {
     // bottom 10
   }
 }
-
-spawn-at-startup "waybar"
-spawn-at-startup "hypridle"
-spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent"
+// spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent"
 spawn-at-startup "hyprpolkit"
+// spawn-at-startup "hypridle"
+spawn-at-startup "hyprpaper"
+spawn-at-startup "waybar"
 spawn-at-startup "eww" "daemon"
 spawn-at-startup "eww" "open-many" "cpu-desktop-widget" "gpu-desktop-widget" "ram-desktop-widget" "disk-desktop-widget" "calendar-desktop-widget"
 
@@ -193,4 +193,9 @@ animations {
 
   // Slow down all animations by this factor. Values below 1 speed them up instead.
   // slowdown 3.0
+}
+gestures {
+    hot-corners {
+        off
+    }
 }
