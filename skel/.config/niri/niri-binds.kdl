@@ -117,10 +117,10 @@ binds {
   Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
   Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
-  Mod+Period { consume-or-expel-window-right; }
+  Mod+period { consume-or-expel-window-right; }
   Mod+comma  { consume-or-expel-window-left; }
-  // Mod+shift+Period { consume-or-expel-window-right; }
-  // Mod+shfit+comma  { consume-or-expel-window-left; }
+  Mod+shift+period  { expel-window-from-column; }
+  Mod+shift+comma { consume-window-into-column; }
   // Mod+BracketLeft  { consume-or-expel-window-left; }
   // Mod+BracketRight { consume-or-expel-window-right; }
 
