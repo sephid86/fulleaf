@@ -180,4 +180,6 @@ binds {
   Mod+shift+slash{
     spawn "sh" "-c" "DEVICES=$(bluetoothctl devices | grep 'Device' | awk '{print $2 \"|\" $3,$4,$5,$6,$7,$8,$9}'); DEVICE_NAMES=$(echo \"$DEVICES\" | cut -d'|' -f2); SELECTED_NAME=$(echo \"$DEVICE_NAMES\" | fuzzel --dmenu --cache=$HOME/cache/blthlist_fuzzel --prompt='Bluetooth Devices ' --anchor=top-right --x-margin=60 --y-margin=20 --width=25 --lines=3); if [ -n \"$SELECTED_NAME\" ]; then MAC_ADDR=$(echo \"$DEVICES\" | grep \"$SELECTED_NAME\" | cut -d'|' -f1); bluetoothctl connect $MAC_ADDR; fi"
   }
+    // Mod + M을 누르면 플로팅 상태를 유지하며 화면을 꽉 채움
+    // Mod+M { spawn "sh" "-c" "niri msg action set-window-height 100%; niri msg action set-window-width 100%; niri msg action center-column"; }
 }

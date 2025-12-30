@@ -3,16 +3,17 @@ window-rule {
   geometry-corner-radius 4
   clip-to-geometry true
 }
+
 window-rule {
   match is-active=false
   opacity 0.85
 }
+
 window-rule {
-  // This regular expression is intentionally made as specific as possible,
-  // since this is the default config, and we want no false positives.
-  // You can get away with just app-id="wezterm" if you want.
-  match app-id=r#"^org\.wezfurlong\.wezterm$"#
-  default-column-width {}
+  match is-floating=true
+  shadow {
+    on
+  }
 }
 
 window-rule {
@@ -24,6 +25,7 @@ window-rule {
 window-rule {
   match app-id="foot"
 }
+
 window-rule {
   match app-id="foot-float"
   open-floating true
@@ -57,14 +59,14 @@ window-rule {
 }
 
 window-rule {
-    match title="PIP 모드"
-    open-floating true
+  match title="PIP 모드"
+  open-floating true
   // default-column-width {}
-      // default-column-width { proportion 0.25; }
-// // max-height { proportion 0.7; }
-// // default-floating-height 300
-max-height 270
-      default-floating-position x=10 y=10 relative-to="bottom-right"
+  // default-column-width { proportion 0.25; }
+  // // max-height { proportion 0.7; }
+  // // default-floating-height 300
+  max-height 270
+  default-floating-position x=10 y=10 relative-to="bottom-right"
 
   opacity 1.0
 }
