@@ -39,6 +39,13 @@ window-rule {
   open-floating true
 }
 
+window-rule {
+    // 제목 중간에 " - YouTube"가 포함되고, 끝이 "Chrome"으로 끝나는 창 매칭
+    // 정규표현식 설명: .+(어떤 제목) + " - YouTube"
+    match title=".+ - YouTube - (Google )?Chrome$"
+    opacity 1.0
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
