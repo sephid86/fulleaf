@@ -18,12 +18,21 @@ window-rule {
 
 window-rule {
   match app-id="mpv"
-  // default-column-width {}
+  default-column-width {}
   // open-floating true
 }
-
 window-rule {
-  match app-id="foot"
+    match app-id="org.hyprland.polkit-agent"
+    open-floating true
+    // exclude-from-layout true 
+}
+window-rule {
+
+match app-id="foot"
+
+  // default-column-width {}
+// default-column-width { fixed 270; }
+
 }
 
 window-rule {
@@ -44,6 +53,8 @@ window-rule {
     // 정규표현식 설명: .+(어떤 제목) + " - YouTube"
     match title=".+ - YouTube - (Google )?Chrome$"
     opacity 1.0
+// exclude-from-layout true
+    // focus-on-open false
 }
 
 // Example: block out two password managers from screen capture.

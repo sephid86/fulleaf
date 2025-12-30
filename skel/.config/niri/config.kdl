@@ -171,7 +171,8 @@ layout {
   }
 }
 // spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent"
-spawn-at-startup "hyprpolkit"
+// spawn-at-startup "hyprpolkit"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "hypridle"
 spawn-at-startup "hyprpaper"
 spawn-at-startup "waybar"

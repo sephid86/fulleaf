@@ -3,12 +3,14 @@ binds {
   Mod+ctrl+Slash { show-hotkey-overlay; }
 
   Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-  Mod+shift+return hotkey-overlay-title="Open a yazi" { spawn "foot" "bash" "-ic" "r; exec bash"; }
+  Mod+shift+return hotkey-overlay-title="Open a yazi" { spawn "foot" "-a" "foot-floating" "bash" "-ic" "r; exec bash"; }
+  // Mod+shift+return hotkey-overlay-title="Open a yazi" { spawn-sh "foot -a foot-floating bash -ic r"; }
   // Mod+shift+return hotkey-overlay-title="Open a yazi" { 
   //   spawn "sh" "-c" "foot bash -ic 'r; exec bash' & sleep 0.1 && niri msg action consume-or-expel-window-left"
   // }
-  Mod+e hotkey-overlay-title="Open a yazi" { spawn "foot" "-a" "foot-floating" "bash" "-ic" "r; exec bash"; }
-  // Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun" "-I"; }
+  Mod+e hotkey-overlay-title="Open a LazyVim" { spawn "foot" "-a" "foot-float" "sh" "-c" "echo|nvim"; }
+  // Mod+e hotkey-overlay-title="Open a LazyVim" { spawn-sh "echo -n | foot -a foot-float nvim -"; }
+// Mod+E { spawn "foot -a foot-float nvim -c 'startinsert'" }
 
   Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
@@ -149,7 +151,7 @@ binds {
   Mod+z       { toggle-window-floating; }
   Mod+Space { switch-focus-between-floating-and-tiling; }
 
-  Mod+v { toggle-column-tabbed-display; }
+  Mod+u { toggle-column-tabbed-display; }
 
   Print { screenshot; }
   shift+Print { screenshot-screen; }
